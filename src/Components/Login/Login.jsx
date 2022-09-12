@@ -10,8 +10,10 @@ const Login = () => {
     }
 
     return(
-        <div>
-            { !formIsSubmitted ? <LoginForm submitForm={submitForm} /> : <Home />}
+        <div className='w-h flex-col items-center justify-start'>
+            <div className='p-3'>
+                { !formIsSubmitted ? <LoginForm submitForm={submitForm} /> : <Home />}
+            </div>         
         </div>
     )
 }
