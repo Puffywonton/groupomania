@@ -54,17 +54,22 @@ const LoginForm = ({ submitForm , userSignup }) => {
     return(
         <div className="bg-red-300 p-3 flex-col items-center justify-center h-screen w-screen">
             <Box
-                className="bg-orange-400 w-4/5 h-screen flex-col"
                 component="form"
                 sx={{
                     '& > :not(style)': { m: 1, width: '25ch' },
+                    background: "blue",
+                    width: 'auto',
+                    height: 'auto',
+                    display: "flex",
+                    border: "1px, solid",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
                 }}
                 noValidate
                 autoComplete="off"
             >
-                <div>test</div>
                 <TextField
-                    className="bg-red-300"
                     error={errors.email? true : false} 
                     helperText={errors.email}
                     required 
