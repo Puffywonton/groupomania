@@ -14,7 +14,7 @@ function Signup() {
     }
     return (
         <div>
-            { !formIsSubmitted ? <SignupForm submitForm={submitForm}/> : <div><SignupFormSuccess /><Home /></div>}
+            { !formIsSubmitted ? <SignupForm submitForm={submitForm}/> : <div><SignupFormSuccess /></div>}
         </div>
     );
 }

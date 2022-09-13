@@ -1,9 +1,10 @@
 import React, { useContext, useState }  from 'react';
 import { userContext } from "../Context/userContext"
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios'
 import Loader from '../Components/Loader';
+import BillCard from '../Components/BillCard';
 
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
@@ -67,15 +68,21 @@ const Home = () => {
 
     if(billboard.data && !billboard.error){
         content = 
-        billboard.data.map((bill, key) => 
-            <div>
-                {bill.title}
+        billboard.data.map((bill) => 
+            <div key={bill._id}>
+                <BillCard 
+                    bill = {bill}
+                />
             </div>
         )
     }
     return(
         <div>
-            <h1 className='font-bold text-2xl'>Home Page</h1>
+            <div className='flex justify-center'>
+                <Link to={`/createbill`} className="bg-red-900 border rounded font-bold text-xl p-3 mt-2">
+                    Créer un Bill :D
+                </Link>
+            </div>
             {content}
         </div>
     )

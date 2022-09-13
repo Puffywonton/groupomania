@@ -1,12 +1,13 @@
 import React from "react"
 import Navigation from "./Navigation/Navigation"
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return(
         <header className="border-b p-3 flex justify-between items-center">
-            <span className="font-bold">
+            <Link to={`/`} className="font-bold">
                 Groupomania
-            </span>
+            </Link>
             <Navigation />
         </header>
     )

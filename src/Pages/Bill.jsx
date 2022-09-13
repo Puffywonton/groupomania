@@ -58,28 +58,30 @@ const Bill = () => {
 
     if(bill.data && !bill.error){
         content = 
-            <div>
-                <h1 className='text-2xl font-bold mb-3'>
+            <div className='m-3 border rounded overflow-hidden'>
+                <div className='font-bold text-xl mb-3'>
                     {bill.data.title}
-                </h1>
-                <div>
-                    <div>
-                        <img 
-                            src={bill.data.imageUrl}
-                            alt={bill.data.name}
-                        />
-                    </div>
-                    <div>
-                        {bill.data.text}
-                    </div>
                 </div>
                 <div>
-                    <span>Likes= {bill.data.likes}</span>
-                    <span>Dislikes= {bill.data.dislikes}</span>
+                    <img 
+                        src={bill.data.imageUrl}
+                        alt={bill.data.name}
+                    />
+                </div>
+                <div className='p-3 mb-3'>
+                    {bill.data.text}
+                </div>
+                <div className='flex'>
+                    <div className='bg-red-600 w-1/2 text-center'>
+                        likes {bill.data.likes}                  
+                    </div>
+                    <div className='bg-blue-600 w-1/2 text-center'>
+                        dislikes {bill.data.dislikes}
+                    </div>
                 </div>
             </div>
     }
-    
+
     return(
         <div>
             {content}
