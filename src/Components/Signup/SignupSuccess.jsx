@@ -5,6 +5,7 @@ const SignupFormSuccess = () => {
     return(
         <div>
             <h1>USER CREATED</h1>
+            
         </div>        
     )
 }

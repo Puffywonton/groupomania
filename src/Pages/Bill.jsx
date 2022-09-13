@@ -46,7 +46,7 @@ const Bill = () => {
                         error: true
                     })
                 })
-    }, [url])
+    }, [url, tokenStr])
 
     if(bill.loading){
         content = <Loader />

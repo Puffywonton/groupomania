@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import { userContext } from "../../Context/userContext";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
@@ -13,6 +13,7 @@ const LoginForm = ({ submitForm }) => {
     const navigateSignup = () => {
         navigate('/signup')
     }
+    
     const [values, setValues] = useState({
         email:"",
         password:"",
@@ -34,7 +35,7 @@ const LoginForm = ({ submitForm }) => {
         setDataIsCorrect(true)
     }
     
-    const { currentUser, setCurrentUser } = useContext(userContext)
+    const { setCurrentUser } = useContext(userContext)
 
     useEffect(() => {
         if(Object.keys(errors).length === 0 && dataIsCorrect){
@@ -53,7 +54,7 @@ const LoginForm = ({ submitForm }) => {
                 setErrors(loginError)
             })
         }
-    }, [errors])
+    }, [errors, dataIsCorrect, setCurrentUser,submitForm,values])
 
     return(
         <div className="bloc p-3 flex-col items-center justify-center">

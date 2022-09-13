@@ -9,14 +9,7 @@ import BillCard from '../Components/BillCard';
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
     const navigate = useNavigate()
-    const navigateLogin = () => {
-        navigate('/login')
-    }
-    useEffect(() => {
-        if (!currentUser) {
-            navigateLogin()
-        }
-    }, [])
+    
 
     const url = 'http://localhost:8000/api/billboard'
     let tokenStr = JSON.parse(localStorage.getItem('token'))
@@ -30,33 +23,37 @@ const Home = () => {
     let content = null
 
     useEffect(() => {
-        setBillboard({
-            loading: true,
-            data: null,
-            error: false
-        })
-        axios.get(url, {
-            headers: {
-                'Authorization': `Bearer ${tokenStr}`
-              }
+        if (!currentUser) {
+            navigate('/login')
+        }else{
+            setBillboard({
+                loading: true,
+                data: null,
+                error: false
             })
-                .then(response => {
-                    console.log(response)
-                    setBillboard({
-                        loading: false,
-                        data: response.data,
-                        error: false
-                    })
-                    
+            axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${tokenStr}`
+                }
                 })
-                .catch(error => {
-                    setBillboard({
-                        loading: false,
-                        data: error.message,
-                        error: true
+                    .then(response => {
+                        console.log(response)
+                        setBillboard({
+                            loading: false,
+                            data: response.data,
+                            error: false
+                        })
+                        
                     })
-                })
-    }, [url])
+                    .catch(error => {
+                        setBillboard({
+                            loading: false,
+                            data: error.message,
+                            error: true
+                        })
+                    })
+        }
+    }, [url, navigate, currentUser, tokenStr])
 
     if(billboard.loading){
         content = <Loader />

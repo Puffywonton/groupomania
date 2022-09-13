@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom'
-import { DataProvider, userContext } from './Context/userContext';
+import { DataProvider } from './Context/userContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Home from './Pages/Home'
