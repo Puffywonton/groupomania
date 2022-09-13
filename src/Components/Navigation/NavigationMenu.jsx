@@ -58,6 +58,7 @@ const NavigationMenu = (props) => {
                             onClick={() => {
                                 closeMenu()
                                 setCurrentUser(null)
+                                //delete localstorage
                                 // QUESTION meilleur soluc pour closemenu ca fait un peu bizarre? 
                             }}
                             className="text-blue-500 py-3 border-b block"
