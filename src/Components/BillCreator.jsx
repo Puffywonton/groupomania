@@ -1,12 +1,69 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 //titre
 //description
 //date
 //
 const BillCreator = () => {
+    const url = "http://localhost:8000/api/billboard"
+    let tokenStr = JSON.parse(localStorage.getItem('token'))
+
+    const navigate = useNavigate()
+    const navigateHome = () => {
+        navigate('/')
+    }
+    const [values, setValues] = useState({
+        title:"",
+        text:"",
+    })
+
+
+
+    const handleChange = (event) => {
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value,
+        })
+    }
+
+    const handleImage = (event) => {
+        console.log(event.target.files[0])
+        setValues({
+            ...values,
+            [event.target.name]: event.target.files[0]
+        })
+    }
+    const [dataIsCorrect, setDataIsCorrect] = useState(false)
+    
+    const FormSubmit = (event) => {
+        event.preventDefault()
+        // setErrors(Validation(values))
+        setDataIsCorrect(true)
+        console.log(values, 'hello sir')
+    }
+
+    useEffect(() => {
+        if(dataIsCorrect){
+            axios.post(url, values, {
+                headers: {
+                    'Authorization': `Bearer ${tokenStr}`,
+                    'Content-Type': 'multipart/form-data'
+                  },
+            })
+            .then(response => {
+                console.log(response.data)
+                navigateHome()
+            })
+            .catch(catchErrors => {
+                console.log(catchErrors)
+            })
+        }
+    }, [navigate, dataIsCorrect, values, tokenStr])
+
     return(
         <div className="bg-red-400 bloc m-4 p-3 rounded flex-col items-center justify-center">
             <Box>
@@ -16,38 +73,49 @@ const BillCreator = () => {
                 <TextField
                     fullWidth
                     required
-                    name='Titre'
+                    name='title'
                     id="title" 
                     label="titre" 
                     variant="outlined"
-                    // value={}
-                    // onChange={}
+                    value={values.title}
+                    onChange={handleChange}
                 />
             </Box>
             <Box pt={2}>
                 <TextField 
                     fullWidth
-                    required
-                    label="un text interessant"
+                    label="un texte interessant"
                     multiline
                     minRows={6}
                     maxRows={10}
-                    name='Texte'
+                    name='text'
                     id="text"
                     variant="outlined" 
-                    // value={}
-                    // onChange={}
+                    value={values.text}
+                    onChange={handleChange}
                 />
             </Box>
             <Box pt={1}>
-                <Button>
+                <Button 
+                    component="label"
+                >
                     Ajouter/Modifier une image
+                    <input 
+                        hidden
+                        accept="image/*" 
+                        multiple
+                        type="file"
+                        name='image'
+                        id='image'
+                        // value={values.image}
+                        onChange={handleImage}
+                    />
                 </Button>
             </Box>
             <Box pt={1}>
                 <Button 
                     variant='contained'
-                    // onClick={}
+                    onClick={FormSubmit}
                 >
                     envoyer/modifier
                 </Button>  
