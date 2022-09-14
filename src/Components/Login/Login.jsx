@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import LoginForm from "./LoginForm"
 import { useNavigate } from "react-router-dom"
 const Login = () => {
-    const [formIsSubmitted, setFormIsSubmitted] = useState(false)
+    const [setFormIsSubmitted] = useState(false)
     const navigate = useNavigate()
     
     const submitForm = () => {

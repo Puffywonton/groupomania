@@ -6,27 +6,15 @@ import Button from '@mui/material/Button';
 //description
 //date
 //
-
 const BillCreator = () => {
     return(
-        <div className="bloc p-3 flex-col items-center justify-center">
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                    background: "lightgrey",
-                    width: 'auto',
-                    height: 'auto',
-                    display: "flex",
-                    border: "1px, solid",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-                noValidate
-                autoComplete="off"
-            >
+        <div className="bg-red-400 bloc m-4 p-3 rounded flex-col items-center justify-center">
+            <Box>
+                <div className='border-b pb-3 font-bold'>Creez/modifiez une publication </div>
+            </Box>
+            <Box pt={2}>
                 <TextField
+                    fullWidth
                     required
                     name='Titre'
                     id="title" 
@@ -35,22 +23,35 @@ const BillCreator = () => {
                     // value={}
                     // onChange={}
                 />
+            </Box>
+            <Box pt={2}>
                 <TextField 
+                    fullWidth
                     required
+                    label="un text interessant"
+                    multiline
+                    minRows={6}
+                    maxRows={10}
                     name='Texte'
                     id="text"
-                    label="text" 
                     variant="outlined" 
                     // value={}
                     // onChange={}
                 />
+            </Box>
+            <Box pt={1}>
+                <Button>
+                    Ajouter/Modifier une image
+                </Button>
+            </Box>
+            <Box pt={1}>
                 <Button 
                     variant='contained'
                     // onClick={}
                 >
                     envoyer/modifier
-                </Button>               
-            </Box>           
+                </Button>  
+            </Box>       
         </div>
     )
 }
