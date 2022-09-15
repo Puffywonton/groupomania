@@ -13,9 +13,7 @@ const BillCreator = () => {
     let tokenStr = JSON.parse(localStorage.getItem('token'))
 
     const navigate = useNavigate()
-    const navigateHome = () => {
-        navigate('/')
-    }
+    
     const [values, setValues] = useState({
         title:"",
         text:"",
@@ -47,6 +45,9 @@ const BillCreator = () => {
     }
 
     useEffect(() => {
+        const navigateHome = () => {
+            navigate('/')
+        }
         if(dataIsCorrect){
             axios.post(url, values, {
                 headers: {

@@ -1,7 +1,52 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { userContext } from '../Context/userContext'
 
 const BillCard = (props) => {
+    //recup avec les props la situation des likes
+    const { currentUser, setCurrentUser } = useContext(userContext)
+    const [like, setLike] = useState(false)
+    const [dislike, setDislike] = useState(false)
+
+    console.log(currentUser)
+    // for(let user in props.bill.usersLiked){
+    //     if(props.bill.usersLiked[user] === currentUser){
+    //         setLike(true)
+    //     }
+    // }
+    // for(let user in props.bill.usersDisliked){
+    //     if(props.bill.usersDisliked[user] === currentUser){
+    //         setDislike(true)
+    //     }
+    // }
+
+    
+    //il faudra modif ici pour directement mettre un like/disklike si le user l'a fait auparavaement
+
+
+    //utiliser id??? 
+    const handleLike = (event) => {
+        console.log(event.target.id)
+        if(event.target.id === "like"){
+            setLike(true)
+            console.log("LIKE")
+        }else{
+            setDislike(true)
+            console.log("DISLIKE")
+        }
+    }
+
+    // useEffect(() => {
+    //     if(like){
+    //         console.log("coucou")
+    //     }
+    // },[like])
+
+
+
     return(
         <div className='m-3 border rounded overflow-hidden'>
             <div className='p-3'>
@@ -24,11 +69,13 @@ const BillCard = (props) => {
                     </Link>
             </div>
             <div className='flex'>
-                <div className='bg-red-600 w-1/2 text-center'>
-                    likes {props.bill.likes}                  
+                <div className='flex justify-center border w-1/2 text-center' id="like" onClick={handleLike}>
+                    <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowUp} />
+                    <div>{props.bill.likes}</div>
                 </div>
-                <div className='bg-blue-600 w-1/2 text-center'>
-                    dislikes {props.bill.dislikes}
+                <div className='flex justify-center border w-1/2 text-center' id="dislike" onClick={handleLike}>
+                    <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowDown} />
+                    <div>{props.bill.dislikes}</div>
                 </div>
             </div>
         </div>
