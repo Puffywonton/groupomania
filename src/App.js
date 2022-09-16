@@ -9,6 +9,7 @@ import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import Bill from './Pages/Bill';
 import CreateBill from './Pages/CreateBill';
+import Billboard from './Pages/Billboard';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState('')
@@ -23,6 +24,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/bill/:id" element={<Bill />} />
+              <Route path="/billboard" element={<Billboard />} />
               <Route path="/createbill" element={<CreateBill />} />
             </Routes>
             <Footer />

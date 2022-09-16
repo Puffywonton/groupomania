@@ -4,47 +4,79 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../Context/userContext'
+import axios from 'axios'
 
 const BillCard = (props) => {
-    //recup avec les props la situation des likes
-    const { currentUser, setCurrentUser } = useContext(userContext)
-    const [like, setLike] = useState(false)
-    const [dislike, setDislike] = useState(false)
-
-    console.log(currentUser)
-    // for(let user in props.bill.usersLiked){
-    //     if(props.bill.usersLiked[user] === currentUser){
-    //         setLike(true)
-    //     }
-    // }
-    // for(let user in props.bill.usersDisliked){
-    //     if(props.bill.usersDisliked[user] === currentUser){
-    //         setDislike(true)
-    //     }
-    // }
-
     
-    //il faudra modif ici pour directement mettre un like/disklike si le user l'a fait auparavaement
+    const { currentUser, setCurrentUser } = useContext(userContext)
 
+    const url = `http://localhost:8000/api/billboard/${props.bill._id}/like`
+    const tokenStr = JSON.parse(localStorage.getItem('token'))
+
+    const [values, setValues] = useState({
+        userId: userContext,
+    })
+
+    const [toto, setToto] = useState(false)
+    //recup avec les props la situation des likes
+    const didUserLike = props.bill.usersLiked.find(user => user === currentUser )
+    const didUserDislike = props.bill.usersDisliked.find(user => user === currentUser)
+    //il faudra modif ici pour directement mettre un like/disklike si le user l'a fait auparavaement
 
     //utiliser id??? 
     const handleLike = (event) => {
-        console.log(event.target.id)
         if(event.target.id === "like"){
-            setLike(true)
-            console.log("LIKE")
+            if(didUserLike){
+                console.log("already liked removing like")
+                setValues({
+                    ...values,
+                    like:"0"
+                })
+            }else{
+                console.log("LIKE")
+                setValues({
+                    ...values,
+                    like:"1"
+                })
+            }           
         }else{
-            setDislike(true)
-            console.log("DISLIKE")
+            if(didUserDislike){
+                console.log("already disliked removing dislike")
+                setValues({
+                    ...values,
+                    like:"0"
+                })
+            }else{
+                console.log("DISLIKE")
+                setValues({
+                    ...values,
+                    like:"-1"
+                })
+            }
         }
+        setToto(true)
     }
-
-    // useEffect(() => {
-    //     if(like){
-    //         console.log("coucou")
-    //     }
-    // },[like])
-
+    useEffect(() => {
+        if(toto){
+            setToto(false)
+            console.log("sending aPI")
+            axios.post(url, values,{
+                headers: {
+                    'Authorization': `Bearer ${tokenStr}`
+                }
+            })
+            .then(response => {
+                console.log("hello")
+                setToto(false)
+                // console.log(response.data)
+            })
+            .catch(catchErrors => {
+                console.log("goodbye")
+                setToto(false)
+                // console.log(catchErrors)
+            })
+        }       
+    }, [toto])
 
 
     return(
@@ -58,7 +90,6 @@ const BillCard = (props) => {
             </div>
             <Link to={`/bill/${props.bill._id}`}>
                 <div
-                    // style={{'backgroundImage': `url('${props.bill.imageUrl})`}}
                     style={{'backgroundImage': `url('${props.bill.imageUrl}')`}}
                     className="w-full h-64 bg-blue bg-cover"
                 />
@@ -69,11 +100,11 @@ const BillCard = (props) => {
                     </Link>
             </div>
             <div className='flex'>
-                <div className='flex justify-center border w-1/2 text-center' id="like" onClick={handleLike}>
+                <div className={`flex justify-center border w-1/2 text-center' ${didUserLike ? `bg-red-500` : null}`} id="like" onClick={handleLike}>
                     <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowUp} />
                     <div>{props.bill.likes}</div>
                 </div>
-                <div className='flex justify-center border w-1/2 text-center' id="dislike" onClick={handleLike}>
+                <div className={`flex justify-center border w-1/2 text-center' ${didUserDislike ? `bg-red-500` : null}`} id="dislike" onClick={handleLike}>
                     <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowDown} />
                     <div>{props.bill.dislikes}</div>
                 </div>
