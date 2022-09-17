@@ -9,6 +9,7 @@ import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import Bill from './Pages/Bill';
 import CreateBill from './Pages/CreateBill';
+import ModifyBill from './Pages/ModifyBill';
 import Billboard from './Pages/Billboard';
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
               <Route path="/bill/:id" element={<Bill />} />
               <Route path="/billboard" element={<Billboard />} />
               <Route path="/createbill" element={<CreateBill />} />
+              <Route path="/modifybill/:id" element={<ModifyBill />} />
             </Routes>
             <Footer />
           </Router>    
