@@ -10,13 +10,14 @@ import Billboard from './Billboard';
 
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
+    const navigate = useNavigate()
     console.log(currentUser)
-    // useEffect(() => {
-    //     if(!currentUser){
-    //         console.log("hello")
-    //         navigate("/login")
-    //     }
-    // })
+    useEffect(() => {
+        if(!currentUser){
+            console.log("hello")
+            navigate("/login")
+        }
+    })
     return(
         <Billboard />
     )

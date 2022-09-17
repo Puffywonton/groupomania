@@ -3,14 +3,23 @@ import React, { useContext, useEffect, useState }  from 'react';
 import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import BillCard from '../Components/BillCard';
 import Loader from '../Components/Loader';
+import { userContext } from '../Context/userContext';
 
 const Billboard = () => {
-    // const { currentUser, setCurrentUser } = useContext(userContext)
-    // const navigate = useNavigate()
+    const { currentUser, setCurrentUser } = useContext(userContext)
 
-    const url = 'http://localhost:8000/api/billboard'
-    
-    
+    const url_billboard = 'http://localhost:8000/api/billboard'
+    const tokenStr = JSON.parse(localStorage.getItem('token'))
+
+    const [likeUpdate, setLikeUpdate] = useState({
+        isTrue: false,
+        url:"",
+        data: {
+            userId: currentUser,
+            like: "1"
+        } 
+    })
+
     const [billboard, setBillboard] = useState({
         loading: false,
         data: null,
@@ -19,14 +28,14 @@ const Billboard = () => {
 
     let content = null
 
-    useEffect(() => {
-        const tokenStr = JSON.parse(localStorage.getItem('token'))
+
+    const getBillBoard = () => {
         setBillboard({
             loading: true,
             data: null,
             error: false
         })
-        axios.get(url, {
+        axios.get(url_billboard, {
             headers: {
                 'Authorization': `Bearer ${tokenStr}`
             }
@@ -47,7 +56,32 @@ const Billboard = () => {
                     error: true
                 })
             })
-    }, [])
+    }
+
+    useEffect(() => {
+        if(likeUpdate.isTrue){
+            console.log("post like here",likeUpdate.data)
+            axios.post(likeUpdate.url, likeUpdate.data, {
+                headers: {
+                    'Authorization': `Bearer ${tokenStr}`
+                  }
+                })
+                    .then(response => {
+                        console.log(response)
+                        getBillBoard()
+                        console.log("post updated")
+                        
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                        console.log("error")
+                    })
+        }else{
+            getBillBoard()
+        }
+        console.log("does it go here ?")
+        likeUpdate.isTrue = false
+    }, [likeUpdate.data, likeUpdate.isTrue, likeUpdate.url, likeUpdate, tokenStr])
 
     if(billboard.loading){
         content = <Loader />
@@ -63,6 +97,8 @@ const Billboard = () => {
             <div key={bill._id}>
                 <BillCard 
                     bill = {bill}
+                    setLikeUpdate={setLikeUpdate}
+                    likeUpdate={likeUpdate}
                 />
             </div>
         )
