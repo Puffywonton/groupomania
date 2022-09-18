@@ -7,12 +7,15 @@ import Loader from '../Components/Loader'
 import BillCard from '../Components/BillCard'
 import { userContext } from '../Context/userContext'
 import { useContext } from 'react'
+import useGetOneBill from '../Components/BillStuff/useGetOneBill'
 
 
 const Bill = () => {
     const { id } = useParams()
     const { currentUser, setCurrentUser } = useContext(userContext)
     const tokenStr = JSON.parse(localStorage.getItem('token'))
+
+    const { bill } = useGetOneBill(id)
 
     const [likeUpdate, setLikeUpdate] = useState({
         isTrue: false,
@@ -23,42 +26,9 @@ const Bill = () => {
         } 
     })
     
-    const [bill, setBill] = useState({
-        loading: false,
-        data: null,
-        error: false
-    })
+
 
     let content = null
-
-    useEffect(() => {
-        const url_bill = `http://localhost:8000/api/billboard/${id}`
-        setBill({
-            loading: true,
-            data: null,
-            error: false
-        })
-        axios.get(url_bill, {
-            headers: {
-                'Authorization': `Bearer ${tokenStr}`
-              }
-            })
-                .then(response => {
-                    setBill({
-                        loading: false,
-                        data: response.data,
-                        error: false
-                    })
-                    
-                })
-                .catch(error => {
-                    setBill({
-                        loading: false,
-                        data: error.message,
-                        error: true
-                    })
-                })
-    }, [id, tokenStr])
     
     useEffect(() => {
         if(likeUpdate.isTrue){
@@ -75,10 +45,10 @@ const Bill = () => {
                     .catch(error => {
                         console.log(error.message)
                         console.log("error")
-                        setBill({
-                            data: error.message,
-                            error: true
-                        })
+                        // setBill({
+                        //     data: error.message,
+                        //     error: true
+                        // })
                     })
             likeUpdate.isTrue = false
         }
