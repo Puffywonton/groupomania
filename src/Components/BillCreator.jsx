@@ -4,10 +4,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-//titre
-//description
-//date
-//
+
 const BillCreator = () => {
     const url = "http://localhost:8000/api/billboard"
     let tokenStr = JSON.parse(localStorage.getItem('token'))
@@ -19,8 +16,6 @@ const BillCreator = () => {
         text:"",
     })
 
-
-
     const handleChange = (event) => {
         setValues({
             ...values,
@@ -28,20 +23,28 @@ const BillCreator = () => {
         })
     }
 
+    const [selectedImage, setSelectedImage] = useState(null)
+
     const handleImage = (event) => {
-        console.log(event.target.files[0])
+        setSelectedImage(event.target.files[0])
         setValues({
             ...values,
             [event.target.name]: event.target.files[0]
         })
+        console.log(event.target.value)
+        event.target.value = ""
     }
+
+    const removeSelectedImage = (event) => {
+        console.log(selectedImage)
+        setSelectedImage(null)
+    }
+
     const [dataIsCorrect, setDataIsCorrect] = useState(false)
     
     const FormSubmit = (event) => {
         event.preventDefault()
-        // setErrors(Validation(values))
         setDataIsCorrect(true)
-        console.log(values, 'hello sir')
     }
 
     useEffect(() => {
@@ -82,6 +85,20 @@ const BillCreator = () => {
                     onChange={handleChange}
                 />
             </Box>
+            {selectedImage && (
+                <Box pt={2}>
+                    <img
+                    src={URL.createObjectURL(selectedImage)}
+                    alt="Thumb"
+                    />
+                    <Button 
+                    variant='contained'
+                    onClick={removeSelectedImage}
+                    >
+                        supprimer
+                    </Button>
+                </Box>
+            )}
             <Box pt={2}>
                 <TextField 
                     fullWidth
@@ -108,7 +125,6 @@ const BillCreator = () => {
                         type="file"
                         name='image'
                         id='image'
-                        // value={values.image}
                         onChange={handleImage}
                     />
                 </Button>
