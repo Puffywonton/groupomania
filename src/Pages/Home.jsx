@@ -6,7 +6,7 @@ import axios from 'axios'
 import Loader from '../Components/Loader';
 import BillCard from '../Components/BillCard';
 import Login from '../Components/Login/Login';
-import Billboard from './Billboard';
+import Billboard from '../Components/BillStuff/Billboard';
 
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
@@ -14,12 +14,19 @@ const Home = () => {
     console.log(currentUser)
     useEffect(() => {
         if(!currentUser){
-            console.log("hello")
             navigate("/login")
         }
     })
     return(
-        <Billboard />
+        <div>
+            <div className='flex justify-center'>
+                <Link to={`/createbill`} className="bg-red-900 border rounded font-bold text-xl p-3 mt-2">
+                    Créer un Bill :D
+                </Link>
+            </div>
+            <Billboard />
+        </div>
+        
     )
 }
 

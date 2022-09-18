@@ -10,19 +10,16 @@ import { useContext } from 'react'
 
 
 const Bill = () => {
-    console.log("coucou")
     const { id } = useParams()
     const { currentUser, setCurrentUser } = useContext(userContext)
-
-    const url_bill = `http://localhost:8000/api/billboard/${id}`
-    let tokenStr = JSON.parse(localStorage.getItem('token'))
+    const tokenStr = JSON.parse(localStorage.getItem('token'))
 
     const [likeUpdate, setLikeUpdate] = useState({
         isTrue: false,
         url:"",
         data: {
             userId: currentUser,
-            like: "1"
+            like: ""
         } 
     })
     
@@ -34,7 +31,8 @@ const Bill = () => {
 
     let content = null
 
-    const getBill = () => {
+    useEffect(() => {
+        const url_bill = `http://localhost:8000/api/billboard/${id}`
         setBill({
             loading: true,
             data: null,
@@ -60,8 +58,8 @@ const Bill = () => {
                         error: true
                     })
                 })
-    }
-
+    }, [id, tokenStr])
+    
     useEffect(() => {
         if(likeUpdate.isTrue){
             console.log("post like here",likeUpdate.data)
@@ -72,19 +70,19 @@ const Bill = () => {
                 })
                     .then(response => {
                         console.log(response)
-                        getBill()
-                        console.log("post updated")
-                        
+                        console.log("post updated")                        
                     })
                     .catch(error => {
                         console.log(error.message)
                         console.log("error")
+                        setBill({
+                            data: error.message,
+                            error: true
+                        })
                     })
-        }else{
-            getBill()
+            likeUpdate.isTrue = false
         }
-        likeUpdate.isTrue = false
-    }, [likeUpdate.data, likeUpdate.isTrue, likeUpdate.url, likeUpdate, tokenStr])
+    }, [likeUpdate, tokenStr])
 
     if(bill.loading){
         content = <Loader />
@@ -95,7 +93,6 @@ const Bill = () => {
     }
 
     if(bill.data && !bill.error){
-        console.log(bill.data)
         content = 
         <BillCard 
             bill = {bill.data}

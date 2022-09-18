@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState }  from 'react';
 import {Routes, Route, useNavigate, Link} from 'react-router-dom';
-import BillCard from '../Components/BillCard';
-import Loader from '../Components/Loader';
-import { userContext } from '../Context/userContext';
+import BillCard from '../BillCard';
+import Loader from '../Loader';
+import { userContext } from '../../Context/userContext';
 
 const Billboard = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
 
-    const url_billboard = 'http://localhost:8000/api/billboard'
+    
     const tokenStr = JSON.parse(localStorage.getItem('token'))
 
     const [likeUpdate, setLikeUpdate] = useState({
@@ -28,8 +28,8 @@ const Billboard = () => {
 
     let content = null
 
-
-    const getBillBoard = () => {
+    useEffect(() => {
+        const url_billboard = 'http://localhost:8000/api/billboard'
         setBillboard({
             loading: true,
             data: null,
@@ -56,7 +56,8 @@ const Billboard = () => {
                     error: true
                 })
             })
-    }
+    }, [tokenStr])
+   
 
     useEffect(() => {
         if(likeUpdate.isTrue){
@@ -68,20 +69,20 @@ const Billboard = () => {
                 })
                     .then(response => {
                         console.log(response)
-                        getBillBoard()
                         console.log("post updated")
                         
                     })
                     .catch(error => {
                         console.log(error.message)
                         console.log("error")
+                        setBillboard({
+                            data: error.message,
+                            error: true
+                        })
                     })
-        }else{
-            getBillBoard()
         }
-        console.log("does it go here ?")
         likeUpdate.isTrue = false
-    }, [likeUpdate.data, likeUpdate.isTrue, likeUpdate.url, likeUpdate, tokenStr])
+    }, [likeUpdate, tokenStr])
 
     if(billboard.loading){
         content = <Loader />
@@ -106,11 +107,6 @@ const Billboard = () => {
 
     return(
         <div>
-            <div className='flex justify-center'>
-                <Link to={`/createbill`} className="bg-red-900 border rounded font-bold text-xl p-3 mt-2">
-                    Créer un Bill :D
-                </Link>
-            </div>
             {content}
         </div>
     )

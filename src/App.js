@@ -10,7 +10,7 @@ import Signup from './Components/Signup/Signup';
 import Bill from './Pages/Bill';
 import CreateBill from './Pages/CreateBill';
 import ModifyBill from './Pages/ModifyBill';
-import Billboard from './Pages/Billboard';
+import Billboard from './Components/BillStuff/Billboard';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState('')
