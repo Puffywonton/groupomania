@@ -5,9 +5,39 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../Context/userContext'
 import { Button } from '@mui/material'
+import { Box } from '@mui/system'
+// import DeleteBill from './BillStuff/DeleteBill'
+import axios from 'axios'
+
+
 
 const BillCard = (props) => {
     const { currentUser, setCurrentUser } = useContext(userContext)
+
+    // const { DeleteBill } = useDeleteBill(props.bill._id)
+    const navigate = useNavigate()
+
+    const HandleBillDelete = (event) => {
+        console.log("BOTARD deleting bill", event.target.id)
+        const url = `http://localhost:8000/api/billboard/${event.target.id}`
+        const navigateHome = () => {
+            navigate('/')
+        }
+        const tokenStr = JSON.parse(localStorage.getItem('token'))
+        axios.delete(url, {
+            headers: {
+                'Authorization': `Bearer ${tokenStr}`
+            }
+            })
+            .then(response => {
+                console.log("bill deleted",response)
+                navigateHome()
+
+            })
+            .catch(error => {
+                console.log("error, error")
+            })
+    }
 
     const [ billCardParams, setBillCardParams ] = useState({
         userLikesBill: props.bill.usersLiked.find(user => user === currentUser ),
@@ -119,9 +149,15 @@ const BillCard = (props) => {
                     <Link to={`/bill/${props.bill._id}`}>
                         {props.bill.title}
                     </Link>
-                    <Link className='text-xs' to={`/modifybill/${props.bill._id}`}>
-                        MODIFIER
-                    </Link>
+                    
+                    <Box>
+                        <Link className='text-xs' to={`/modifybill/${props.bill._id}`}>
+                            MODIFIER
+                        </Link>
+                        <div className='text-xs' id={props.bill._id} onClick={HandleBillDelete}>
+                            Delete
+                        </div>
+                    </Box>
                 </div>
             </div>
             <Link to={`/bill/${props.bill._id}`}>
