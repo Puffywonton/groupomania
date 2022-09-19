@@ -9,19 +9,20 @@ import useGetAllBills from './useGetAllBills';
 const Billboard = () => {
     const { currentUser, setCurrentUser } = useContext(userContext) 
     const tokenStr = JSON.parse(localStorage.getItem('token'))
+
     const {billboard} = useGetAllBills()
+    
     const [likeUpdate, setLikeUpdate] = useState({
         isTrue: false,
         url:"",
         data: {
             userId: currentUser,
-            like: "1"
+            like: ""
         } 
     })
 
     useEffect(() => {
         if(likeUpdate.isTrue){
-            console.log("post like here",likeUpdate.data)
             axios.post(likeUpdate.url, likeUpdate.data, {
                 headers: {
                     'Authorization': `Bearer ${tokenStr}`

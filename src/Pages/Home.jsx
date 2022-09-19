@@ -25,8 +25,7 @@ const Home = () => {
                 </Link>
             </div>
             <Billboard />
-        </div>
-        
+        </div>        
     )
 }
 
