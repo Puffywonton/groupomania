@@ -1,12 +1,22 @@
-import React, { useContext }  from 'react';
+import React, { useContext, useState }  from 'react';
 import { userContext } from "../../Context/userContext"
-import { Link } from "react-router-dom"
-
-//QUESTION je peux pas mettre plus de 1 <li> par {currentuser?} je l'emballe dans un div?
-
+import { Link, useNavigate } from "react-router-dom"
+import Logout from '../Logout/Logout';
 
 const NavigationMenu = (props) => {
     const { currentUser, setCurrentUser } = useContext(userContext)
+
+    //je comprends pas les callbacks =/ ca marche pas du tout
+
+    const logout = (props) => {
+        // const { setCurrentUser } = useContext(userContext)
+        setCurrentUser(null)
+        localStorage.clear()
+        return(
+            props.closeMenu
+        )
+        
+    }
 
     const closeMenu = (props) => {
         return(
@@ -55,12 +65,11 @@ const NavigationMenu = (props) => {
                     <li>
                         <Link 
                             to="/" 
-                            onClick={() => {
-                                closeMenu()
-                                setCurrentUser(null)
-                                //delete localstorage
-                                // QUESTION meilleur soluc pour closemenu ca fait un peu bizarre? 
-                            }}
+                            // onClick={() => {
+                            //     // closeMenu()
+                            //     Logout()
+                            // }}
+                            onClick={() => {logout()}}
                             className="text-blue-500 py-3 border-b block"
                         >
                             Logout                           

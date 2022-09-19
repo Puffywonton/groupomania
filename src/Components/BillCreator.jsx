@@ -24,6 +24,7 @@ const BillCreator = () => {
     }
 
     const handleSelectedImage = (event) => {
+        console.log("image",event.target.files[0])
         setValues({
             ...values,
             image: event.target.files[0]

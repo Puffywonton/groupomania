@@ -44,7 +44,7 @@ const SignupForm = ({ submitForm }) => {
               submitForm(true)
             });
         }
-    }, [errors, dataIsCorrect, submitForm,values])
+    }, [errors, dataIsCorrect, submitForm, values])
     
 
     return(

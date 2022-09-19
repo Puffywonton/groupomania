@@ -11,6 +11,7 @@ function Signup() {
     const submitForm = () => {
         setFormIsSubmitted(true)
     }
+    
     return (
         <div>
             { !formIsSubmitted ? <SignupForm submitForm={submitForm}/> : <div><SignupFormSuccess /></div>}
