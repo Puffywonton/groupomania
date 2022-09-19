@@ -7,11 +7,9 @@ const useGetOneBill = (id) => {
         data: null,
         error: false
     })
-
     useEffect(() => {        
         const tokenStr = JSON.parse(localStorage.getItem('token'))
         const url_bill = `http://localhost:8000/api/billboard/${id}`
-        
         setBill({
             loading: true,
             data: null,
@@ -27,8 +25,7 @@ const useGetOneBill = (id) => {
                         loading: false,
                         data: response.data,
                         error: false
-                    })
-                    
+                    })         
                 })
                 .catch(error => {
                     setBill({
@@ -38,7 +35,6 @@ const useGetOneBill = (id) => {
                     })
                 })
     }, [id])
-    
     return{bill}
 }
 

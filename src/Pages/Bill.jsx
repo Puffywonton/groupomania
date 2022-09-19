@@ -9,7 +9,6 @@ import { userContext } from '../Context/userContext'
 import { useContext } from 'react'
 import useGetOneBill from '../Components/BillStuff/useGetOneBill'
 
-
 const Bill = () => {
     const { id } = useParams()
     const { currentUser, setCurrentUser } = useContext(userContext)
@@ -26,10 +25,8 @@ const Bill = () => {
         } 
     })
     
-
-
     let content = null
-    
+
     useEffect(() => {
         if(likeUpdate.isTrue){
             console.log("post like here",likeUpdate.data)
@@ -45,10 +42,6 @@ const Bill = () => {
                     .catch(error => {
                         console.log(error.message)
                         console.log("error")
-                        // setBill({
-                        //     data: error.message,
-                        //     error: true
-                        // })
                     })
             likeUpdate.isTrue = false
         }

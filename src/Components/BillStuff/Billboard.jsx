@@ -4,13 +4,12 @@ import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import BillCard from '../BillCard';
 import Loader from '../Loader';
 import { userContext } from '../../Context/userContext';
+import useGetAllBills from './useGetAllBills';
 
 const Billboard = () => {
-    const { currentUser, setCurrentUser } = useContext(userContext)
-
-    
+    const { currentUser, setCurrentUser } = useContext(userContext) 
     const tokenStr = JSON.parse(localStorage.getItem('token'))
-
+    const {billboard} = useGetAllBills()
     const [likeUpdate, setLikeUpdate] = useState({
         isTrue: false,
         url:"",
@@ -19,45 +18,6 @@ const Billboard = () => {
             like: "1"
         } 
     })
-
-    const [billboard, setBillboard] = useState({
-        loading: false,
-        data: null,
-        error: false
-    })
-
-    let content = null
-
-    useEffect(() => {
-        const url_billboard = 'http://localhost:8000/api/billboard'
-        setBillboard({
-            loading: true,
-            data: null,
-            error: false
-        })
-        axios.get(url_billboard, {
-            headers: {
-                'Authorization': `Bearer ${tokenStr}`
-            }
-            })
-            .then(response => {
-                console.log("BILLBOARD RECEIVED",response)
-                setBillboard({
-                    loading: false,
-                    data: response.data,
-                    error: false
-                })
-                
-            })
-            .catch(error => {
-                setBillboard({
-                    loading: false,
-                    data: error.message,
-                    error: true
-                })
-            })
-    }, [tokenStr])
-   
 
     useEffect(() => {
         if(likeUpdate.isTrue){
@@ -75,15 +35,13 @@ const Billboard = () => {
                     .catch(error => {
                         console.log(error.message)
                         console.log("error")
-                        setBillboard({
-                            data: error.message,
-                            error: true
-                        })
                     })
         }
         likeUpdate.isTrue = false
     }, [likeUpdate, tokenStr])
 
+
+    let content = null
     if(billboard.loading){
         content = <Loader />
     }

@@ -16,7 +16,7 @@ const BillCard = (props) => {
         billDislikesCount: (props.bill.dislikes ? props.bill.dislikes : 0)
     })
 
-    const handleLike = (event) => {
+    const HandleLike = (event) => {
         if(event.target.id === "like"){
             console.log("USER CLICKED LIKED")
             if(billCardParams.userLikesBill){
@@ -109,9 +109,9 @@ const BillCard = (props) => {
                     url: `http://localhost:8000/api/billboard/${props.bill._id}/like`
                 })
             }
-        }
-        console.log(billCardParams,"what i like about you")
+        }  
     }
+
     return(
         <div className='m-3 border rounded overflow-hidden'>
             <div className='p-3'>
@@ -136,11 +136,11 @@ const BillCard = (props) => {
                     </Link>
             </div>
             <div className='flex'>
-                <div className={`flex justify-center border w-1/2 text-center' ${billCardParams.userLikesBill ? `bg-red-500` : null}`} id="like" onClick={handleLike}>
+                <div className={`flex justify-center border w-1/2 text-center' ${billCardParams.userLikesBill ? `bg-red-500` : null}`} id="like" onClick={HandleLike}>
                     <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowUp} />
                     <div>{billCardParams.billLikesCount}</div>
                 </div>
-                <div className={`flex justify-center border w-1/2 text-center' ${billCardParams.userDislikesBill ? `bg-red-500` : null}`} id="dislike" onClick={handleLike}>
+                <div className={`flex justify-center border w-1/2 text-center' ${billCardParams.userDislikesBill ? `bg-red-500` : null}`} id="dislike" onClick={HandleLike}>
                     <FontAwesomeIcon className="pt-1 pr-1" icon={faArrowDown} />
                     <div>{billCardParams.billDislikesCount}</div>
                 </div>

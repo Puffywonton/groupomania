@@ -11,8 +11,6 @@ const BillModCard = (props) => {
         image: props.bill.imageUrl
     })
 
-    console.log("test", props.bill.imageUrl)
-
     return(
         <div className="bg-red-400 bloc m-4 p-3 rounded flex-col items-center justify-center">
             <Box>
@@ -27,7 +25,7 @@ const BillModCard = (props) => {
                     label="titre" 
                     variant="outlined"
                     value={values.title}
-                    // onChange={handleChange}
+                    onChange={props.handleChange}
                 />
             </Box>
             <Box pt={2}>
@@ -37,7 +35,7 @@ const BillModCard = (props) => {
                 />
                 <Button 
                 variant='contained'
-                // onClick={removeSelectedImage}
+                onClick={props.removeSelectedImage}
                 >
                     supprimer
                 </Button>
@@ -53,7 +51,7 @@ const BillModCard = (props) => {
                     id="text"
                     variant="outlined" 
                     value={values.text}
-                    // onChange={handleChange}
+                    onChange={props.handleChange}
                 />
             </Box>
             <Box pt={1}>
@@ -68,14 +66,14 @@ const BillModCard = (props) => {
                         type="file"
                         name='image'
                         id='image'
-                        // onChange={handleImage}
+                        onChange={props.handleSelectedImage}
                     />
                 </Button>
             </Box>
             <Box pt={1}>
                 <Button 
                     variant='contained'
-                    // onClick={FormSubmit}
+                    onClick={props.FormSubmit}
                 >
                     envoyer/modifier
                 </Button>  

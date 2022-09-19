@@ -23,21 +23,21 @@ const BillCreator = () => {
         })
     }
 
-    const [selectedImage, setSelectedImage] = useState(null)
-
-    const handleImage = (event) => {
-        setSelectedImage(event.target.files[0])
+    const handleSelectedImage = (event) => {
         setValues({
             ...values,
-            [event.target.name]: event.target.files[0]
+            image: event.target.files[0]
         })
-        console.log(event.target.value)
+        console.log("test",event.target.name)
         event.target.value = ""
     }
 
     const removeSelectedImage = (event) => {
-        console.log(selectedImage)
-        setSelectedImage(null)
+        setValues({
+            ...values,
+            image: "",
+        })
+        delete values.image
     }
 
     const [dataIsCorrect, setDataIsCorrect] = useState(false)
@@ -85,10 +85,10 @@ const BillCreator = () => {
                     onChange={handleChange}
                 />
             </Box>
-            {selectedImage && (
+            {values.image && (
                 <Box pt={2}>
                     <img
-                    src={URL.createObjectURL(selectedImage)}
+                    src={URL.createObjectURL(values.image)}
                     alt="Thumb"
                     />
                     <Button 
@@ -125,7 +125,7 @@ const BillCreator = () => {
                         type="file"
                         name='image'
                         id='image'
-                        onChange={handleImage}
+                        onChange={handleSelectedImage}
                     />
                 </Button>
             </Box>
