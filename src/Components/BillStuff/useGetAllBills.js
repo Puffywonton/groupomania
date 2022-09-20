@@ -5,42 +5,50 @@ const useGetAllBills = () => {
     const [billboard, setBillboard] = useState({
         loading: false,
         data: null,
-        error: false
+        error: false,
+        reload: true,
     })
 
-    useEffect(() => {        
-        const tokenStr = JSON.parse(localStorage.getItem('token'))
-        const url_billboard = 'http://localhost:8000/api/billboard'
+    useEffect(() => {
         
-        setBillboard({
-            loading: true,
-            data: null,
-            error: false
-        })
-        axios.get(url_billboard, {
-            headers: {
-                'Authorization': `Bearer ${tokenStr}`
-            }
+        if(billboard.reload){
+            const tokenStr = JSON.parse(localStorage.getItem('token'))
+            const url_billboard = 'http://localhost:8000/api/billboard'
+            
+            setBillboard({
+                loading: true,
+                data: null,
+                error: false,
+                reload: false
             })
-            .then(response => {
-                console.log("BILLBOARD RECEIVED",response)
-                setBillboard({
-                    loading: false,
-                    data: response.data,
-                    error: false
+            axios.get(url_billboard, {
+                headers: {
+                    'Authorization': `Bearer ${tokenStr}`
+                }
                 })
-                
-            })
-            .catch(error => {
-                setBillboard({
-                    loading: false,
-                    data: error.message,
-                    error: true
+                .then(response => {
+                    console.log("BILLBOARD RECEIVED",response)
+                    setBillboard({
+                        loading: false,
+                        data: response.data,
+                        error: false,
+                        reload: false,
+                    })
+                    
                 })
-            })
-    }, [])
+                .catch(error => {
+                    setBillboard({
+                        loading: false,
+                        data: error.message,
+                        error: true,
+                        reload: false
+                    })
+                })
+        }
+        
+    }, [billboard.reload])
     
-    return{billboard}
+    return{billboard, setBillboard}
 }
 
 export default useGetAllBills

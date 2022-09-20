@@ -1,28 +1,25 @@
 import axios from "axios"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 
-const DeleteBill = (id) => {
-    const navigate = useNavigate()
-    useEffect(() => {
-        const url = `http://localhost:8000/api/billboard/${id}`
-        const navigateHome = () => {
-            navigate('/')
+const HandleBillDelete = (props) => {
+    console.log(props.bill)
+    console.log("deleting bill", props.bill._id)
+    const url = `http://localhost:8000/api/billboard/${props.bill._id}`
+    const tokenStr = JSON.parse(localStorage.getItem('token'))
+    axios.delete(url, {
+        headers: {
+            'Authorization': `Bearer ${tokenStr}`
         }
-        const tokenStr = JSON.parse(localStorage.getItem('token'))
-        axios.delete(url, {
-            headers: {
-                'Authorization': `Bearer ${tokenStr}`
-            }
+        })
+        .then(response => {
+            console.log("bill deleted",response)
+            props.update({
+                reload: true
             })
-            .then(response => {
-                console.log("bill deleted",response)
 
-            })
-            .catch(error => {
-                console.log("error, error")
-            })
-    },[navigate, id])
+        })
+        .catch(error => {
+            console.log("error, error")
+        })
 }
 
-export default DeleteBill
+export default HandleBillDelete

@@ -11,8 +11,8 @@ const BillCardLikeBox = (props) => {
     const tokenStr = JSON.parse(localStorage.getItem('token'))
 
     const [ billCardParams, setBillCardParams ] = useState({
-        userLikesBill: props.bill.usersLiked.find(user => user === currentUser ),
-        userDislikesBill: props.bill.usersDisliked.find(user => user === currentUser),
+        userLikesBill: props.bill.usersLiked.find(user => user === currentUser.userId ),
+        userDislikesBill: props.bill.usersDisliked.find(user => user === currentUser.userId),
         billLikesCount: (props.bill.likes ? props.bill.likes : 0),
         billDislikesCount: (props.bill.dislikes ? props.bill.dislikes : 0)
     })
@@ -21,7 +21,7 @@ const BillCardLikeBox = (props) => {
         isTrue: false,
         url:"",
         data: {
-            userId: currentUser,
+            userId: currentUser.userId,
             like: ""
         } 
     })
@@ -59,7 +59,7 @@ const BillCardLikeBox = (props) => {
                 setLikeUpdate({
                     ...likeUpdate,
                     data: {
-                        userId: currentUser,
+                        userId: currentUser.userId,
                         like: "0"
                     },
                     isTrue: true,
@@ -70,7 +70,7 @@ const BillCardLikeBox = (props) => {
                 if(billCardParams.userDislikesBill){
                     console.log("REMOVING DISLIKE")
                     setBillCardParams({
-                        userLikesBill: currentUser,
+                        userLikesBill: currentUser.userId,
                         billLikesCount: (billCardParams.billLikesCount+1),
                         userDislikesBill: "",
                         billDislikesCount: (billCardParams.billDislikesCount-1)
@@ -78,14 +78,14 @@ const BillCardLikeBox = (props) => {
                 }else{
                     setBillCardParams({
                         ...billCardParams,
-                        userLikesBill: currentUser,
+                        userLikesBill: currentUser.userId,
                         billLikesCount: (billCardParams.billLikesCount+1),
                     })
                 }               
                 setLikeUpdate({
                     ...likeUpdate,
                     data: {
-                        userId: currentUser,
+                        userId: currentUser.userId,
                         like: "1"
                     },
                     isTrue: true,
@@ -104,7 +104,7 @@ const BillCardLikeBox = (props) => {
                 setLikeUpdate({
                     ...likeUpdate,
                     data: {
-                        userId: currentUser,
+                        userId: currentUser.userId,
                         like: "0"
                     },
                     isTrue: true,
@@ -115,7 +115,7 @@ const BillCardLikeBox = (props) => {
                 if(billCardParams.userLikesBill){
                     console.log("REMOVING LIKE")
                     setBillCardParams({
-                        userDislikesBill:currentUser,
+                        userDislikesBill:currentUser.userId,
                         billDislikesCount: (billCardParams.billDislikesCount+1),
                         userLikesBill: "",
                         billLikesCount: (billCardParams.billLikesCount-1)
@@ -123,14 +123,14 @@ const BillCardLikeBox = (props) => {
                 }else{
                     setBillCardParams({
                         ...billCardParams,
-                        userDislikesBill:currentUser,
+                        userDislikesBill:currentUser.userId,
                         billDislikesCount: (billCardParams.billDislikesCount+1),
                     })
                 }               
                 setLikeUpdate({
                     ...likeUpdate,
                     data: {
-                        userId: currentUser,
+                        userId: currentUser.userId,
                         like: "-1"
                     },
                     isTrue: true,

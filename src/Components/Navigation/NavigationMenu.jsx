@@ -1,7 +1,7 @@
 import React, { useContext, useState }  from 'react';
 import { userContext } from "../../Context/userContext"
 import { Link, useNavigate } from "react-router-dom"
-import Logout from '../Logout/Logout';
+import logoutLogic from '../Logout/logoutLogic';
 
 const NavigationMenu = (props) => {
     const { currentUser, setCurrentUser } = useContext(userContext)
@@ -10,19 +10,16 @@ const NavigationMenu = (props) => {
 
     const logout = (props) => {
         // const { setCurrentUser } = useContext(userContext)
-        setCurrentUser(null)
-        localStorage.clear()
+        // setCurrentUser(null)
+        // localStorage.clear()
+        logoutLogic(setCurrentUser)
+        // props.closeMenu
         return(
             props.closeMenu
         )
         
     }
-
-    const closeMenu = (props) => {
-        return(
-            props.closeMenu
-        )
-    }
+    
     return(
         <div>
             <div className="font-bold py-3">
@@ -70,6 +67,7 @@ const NavigationMenu = (props) => {
                             //     Logout()
                             // }}
                             onClick={() => {logout()}}
+                            // onClick={logout}
                             className="text-blue-500 py-3 border-b block"
                         >
                             Logout                           

@@ -11,9 +11,11 @@ import Billboard from '../Components/BillStuff/Billboard';
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
     const navigate = useNavigate()
-    console.log(currentUser)
+    console.log(currentUser.userId)
+    
+
     useEffect(() => {
-        if(!currentUser){
+        if(!currentUser.userId){
             navigate("/login")
         }
     })
@@ -23,6 +25,9 @@ const Home = () => {
                 <Link to={`/createbill`} className="bg-red-900 border rounded font-bold text-xl p-3 mt-2">
                     Créer un Bill :D
                 </Link>
+            </div>
+            <div>
+                Bienvenue {currentUser.userName}
             </div>
             <Billboard />
         </div>        

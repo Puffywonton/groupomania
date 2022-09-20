@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import BillCard from '../BillCard';
 import Loader from '../Loader';
 import useGetAllBills from './useGetAllBills';
 
 const Billboard = () => {
-    const {billboard} = useGetAllBills()
-    
+    const {billboard, setBillboard} = useGetAllBills()
+ 
     let content = null
+
+
     if(billboard.loading){
         content = <Loader />
     }
@@ -21,6 +24,8 @@ const Billboard = () => {
             <div key={bill._id}>
                 <BillCard 
                     bill = {bill}
+                    //below
+                    update = {setBillboard}
                 />
             </div>
         )

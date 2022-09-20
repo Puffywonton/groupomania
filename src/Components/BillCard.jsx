@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-// import DeleteBill from './BillStuff/DeleteBill'
 import BillCardSettingsBox from './BillStuff/BillCardSettingsBox'
 import BillCardLikeBox from './BillStuff/BillCardLikeBox'
+import { userContext } from '../Context/userContext'
 
 const BillCard = (props) => {
+    const { currentUser } = useContext(userContext)
+
+    let activateSettings = null
+
+    if((currentUser.userId === props.bill.userId) || currentUser.isAdmin){
+        activateSettings =  <BillCardSettingsBox 
+                                bill = {props.bill}
+                                update = {props.update}
+                            />
+    }
+
     return(
         <div className='m-3 border rounded overflow-hidden'>
             <div className='p-3'>
                 <div className='font-bold text-xl mb-3 flex justify-between'>
                     <Link to={`/bill/${props.bill._id}`}>
                         {props.bill.title}
-                    </Link>
-                    <BillCardSettingsBox 
-                        bill = {props.bill}
-                    />
+                    </Link>                  
+                    {activateSettings}
                 </div>
             </div>
             <Link to={`/bill/${props.bill._id}`}>

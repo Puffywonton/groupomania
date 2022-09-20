@@ -44,7 +44,11 @@ const Login = () => {
             axios.post('http://localhost:8000/api/auth/login', values)
             .then(response => {
                 console.log(response.data)
-                setCurrentUser(response.data.userId)
+                setCurrentUser({
+                    userId: response.data.userId,
+                    userName: response.data.userName,
+                    isAdmin: response.data.isAdmin
+                })
                 navigate('/')
                 localStorage.setItem("token", JSON.stringify(response.data.token));
             })
