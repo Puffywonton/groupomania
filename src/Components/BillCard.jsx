@@ -6,36 +6,32 @@ import { userContext } from '../Context/userContext'
 
 const BillCard = (props) => {
     const { currentUser } = useContext(userContext)
-
     let activateSettings = null
 
     if((currentUser.userId === props.bill.userId) || currentUser.isAdmin){
-        activateSettings =  <BillCardSettingsBox 
+        activateSettings =  <BillCardSettingsBox className="p-3"
                                 bill = {props.bill}
                                 update = {props.update}
                             />
     }
 
     return(
-        <div className='m-3 border rounded overflow-hidden'>
+        <div className='max-w-2xl mx-auto border rounded overflow-hidden bg-groupomania-pink mb-10'>
             <div className='p-3'>
-                <div className='font-bold text-xl mb-3 flex justify-between'>
-                    <Link to={`/bill/${props.bill._id}`}>
-                        {props.bill.title}
-                    </Link>                  
+                <div className='font-bold border-b text-xl mb-5 flex justify-between'>
+                    <h2 className='mb-3'>{props.bill.title}</h2>
                     {activateSettings}
                 </div>
             </div>
-            <Link to={`/bill/${props.bill._id}`}>
+            {props.bill.imageUrl &&
                 <div
                     style={{'backgroundImage': `url('${props.bill.imageUrl}')`}}
-                    className="w-full h-64 bg-blue bg-cover"
+                    className="w-full h-96 bg-blue bg-cover"
                 />
-            </Link>
+
+            }
             <div className='p-3 mb-3'>
-                    <Link to={`/bill/${props.bill._id}`}>
-                        {props.bill.text}
-                    </Link>
+                {props.bill.text}
             </div>
             <BillCardLikeBox 
                 bill = {props.bill}

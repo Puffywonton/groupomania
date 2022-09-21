@@ -32,9 +32,10 @@ const Billboard = () => {
     }
 
     return(
-        <div>
-            {content}
-        </div>
+        
+            <div className="bloc p-3 flex-col items-center justify-center">
+                {content}
+            </div>
     )
 }
 

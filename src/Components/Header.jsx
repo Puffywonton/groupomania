@@ -1,12 +1,14 @@
 import React from "react"
 import Navigation from "./Navigation/Navigation"
 import { Link } from 'react-router-dom'
+import logo from '../logo-black.svg'
+
 
 const Header = () => {
     return(
-        <header className="border-b p-3 flex justify-between items-center">
+        <header className="bg-groupomania-red p-5 flex justify-between items-center">
             <Link to={`/`} className="font-bold">
-                Groupomania
+                <img className="max-w-xs" src={logo} alt="groupomania"></img>
             </Link>
             <Navigation />
         </header>

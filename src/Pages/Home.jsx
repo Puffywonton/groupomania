@@ -7,10 +7,13 @@ import Loader from '../Components/Loader';
 import BillCard from '../Components/BillCard';
 import Login from '../Components/Login/Login';
 import Billboard from '../Components/BillStuff/Billboard';
-
+import { Button } from "@mui/material";
 const Home = () => {
     const { currentUser, setCurrentUser } = useContext(userContext)
     const navigate = useNavigate()
+    const navigateCreateBill = () => {
+        navigate('/createbill')
+    }
     console.log(currentUser.userId)
     
 
@@ -20,11 +23,15 @@ const Home = () => {
         }
     })
     return(
-        <div>
-            <div className='flex justify-center'>
-                <Link to={`/createbill`} className="bg-red-900 border rounded font-bold text-xl p-3 mt-2">
-                    Créer un Bill :D
-                </Link>
+        <div className="flex-col justify-center max-w-screen-lg mx-auto bg-neutral-200 min-h-screen">
+            <div className='pt-5 flex justify-center'>  
+                <Button 
+                    component="label"
+                    variant='contained'
+                    onClick={navigateCreateBill}                  
+                >
+                    Qu'avez vous à dire aujourd'hui?                   
+                </Button>
             </div>
             <div>
                 Bienvenue {currentUser.userName}

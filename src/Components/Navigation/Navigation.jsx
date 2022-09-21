@@ -46,7 +46,7 @@ const Navigation = () => {
                     (styles, item) => item && 
                         <animated.div 
                             style={styles}
-                            className="fixed bg-white top-0 left-0 w-4/5 h-full z-50 shadow p-3"
+                            className="fixed bg-white top-0 left-0 md:w-1/4 w-2/5 h-full z-50 shadow p-3"
                         >
                             <NavigationMenu 
                                 closeMenu={() => setShowMenu(false)}

@@ -1,4 +1,5 @@
 import axios from "axios"
+const Swal = require('sweetalert2')
 
 const HandleBillDelete = (props) => {
     console.log(props.bill)
@@ -12,13 +13,30 @@ const HandleBillDelete = (props) => {
         })
         .then(response => {
             console.log("bill deleted",response)
-            props.update({
-                reload: true
-            })
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Supprimé',
+                showConfirmButton: false,
+                timer: 500
+              }).then((result) => {
+                props.update({
+                    reload: true
+                })
+              })
         })
         .catch(error => {
-            console.log("error, error")
+            console.log("error", error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error,
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                props.update({
+                    reload: true
+                })
+              })
         })
 }
 

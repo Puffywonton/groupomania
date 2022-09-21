@@ -23,3 +23,15 @@
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
+
+.bg-groupomania-pink{
+    background-color: #FFD7D7;
+}
+
+.bg-groupomania-black{
+    background-color:  #4E5166;
+}
+
+.bg-groupomania-red{
+    background-color: #FD2D01;
+}

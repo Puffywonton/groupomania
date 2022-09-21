@@ -35,7 +35,7 @@ const NavigationMenu = (props) => {
                         Home
                     </Link>
                 </li>
-                {!currentUser ? (
+                {!currentUser.userId ? (
                     <li>
                         <Link 
                             to="/login" 
@@ -46,7 +46,7 @@ const NavigationMenu = (props) => {
                         </Link>
                     </li>
                 ) : null}
-                {!currentUser ? (
+                {!currentUser.userId ? (
                     <li>
                         <Link 
                             to="/signup" 
@@ -58,7 +58,7 @@ const NavigationMenu = (props) => {
                     </li>
 
                 ) : null}                
-                {currentUser ? (
+                {currentUser.userId ? (
                     <li>
                         <Link 
                             to="/" 

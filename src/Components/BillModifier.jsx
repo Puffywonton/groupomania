@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { userContext } from '../Context/userContext'
 import { Box, Button, TextField } from "@mui/material";
+const Swal = require('sweetalert2')
 
 const BillModifier = (props) => {
     console.log("picture", props.bill.imageUrl)
@@ -70,6 +71,13 @@ const BillModifier = (props) => {
             })
             .then(response => {
                 console.log(response.data)
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: 'Bill modifié',
+                    showConfirmButton: false,
+                    timer: 500
+                  })
                 navigateHome()
             })
             .catch(catchErrors => {
@@ -79,9 +87,9 @@ const BillModifier = (props) => {
     }, [dataIsCorrect, values, tokenStr, url, navigate])
 
     return(
-        <div className="bg-red-400 bloc m-4 p-3 rounded flex-col items-center justify-center">
+        <div className="bg-groupomania-pink bloc m-4 p-3 rounded flex-col items-center justify-center">
             <Box>
-                <div className='border-b pb-3 font-bold'>Creez/modifiez une publication </div>
+                <div className='border-b pb-3 text-lg font-bold'>Modifier une publication </div>
             </Box>
             <Box pt={2}>
                 <TextField
@@ -95,9 +103,26 @@ const BillModifier = (props) => {
                     onChange={handleChange}
                 />
             </Box>
+            <Box pt={1}>
+                <Button 
+                    component="label"
+                    variant='contained'
+                >
+                    Ajouter/Modifier une image
+                    <input 
+                        hidden
+                        accept="image/*" 
+                        multiple
+                        type="file"
+                        name='image'
+                        id='image'
+                        onChange={handleSelectedImage}
+                    />
+                </Button>
+            </Box>
             {values.image && (
                 <Box pt={2}>
-                    <img
+                    <img className='pb-2'
                     src={imageChange ? URL.createObjectURL(values.image) : values.image}
                     alt="Thumb"
                     />
@@ -105,7 +130,7 @@ const BillModifier = (props) => {
                     variant='contained'
                     onClick={removeSelectedImage}
                     >
-                        supprimer
+                        supprimer l'image
                     </Button>
                 </Box>
             )}
@@ -123,29 +148,20 @@ const BillModifier = (props) => {
                     onChange={handleChange}
                 />
             </Box>
-            <Box pt={1}>
-                <Button 
-                    component="label"
-                >
-                    Ajouter/Modifier une image
-                    <input 
-                        hidden
-                        accept="image/*" 
-                        multiple
-                        type="file"
-                        name='image'
-                        id='image'
-                        onChange={handleSelectedImage}
-                    />
-                </Button>
-            </Box>
-            <Box pt={1}>
+            
+            <Box 
+                sx={{
+                    paddingTop: 3,
+                    paddingBottom: 3,
+                    display: "flex",
+                    justifyContent: "center",
+                }}>
                 <Button 
                     variant='contained'
                     onClick={FormSubmit}
                 >
-                    envoyer/modifier
-                </Button>  
+                    modifier
+                </Button> 
             </Box>
         </div>
     )
