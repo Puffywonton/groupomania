@@ -1,6 +1,6 @@
 import React, { useContext, useState }  from 'react';
 import { userContext } from "../../Context/userContext"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import logoutLogic from '../Logout/logoutLogic';
 
 const NavigationMenu = (props) => {
@@ -9,11 +9,11 @@ const NavigationMenu = (props) => {
     //je comprends pas les callbacks =/ ca marche pas du tout
 
     const logout = (props) => {
+        
         // const { setCurrentUser } = useContext(userContext)
-        // setCurrentUser(null)
-        // localStorage.clear()
         logoutLogic(setCurrentUser)
-        // props.closeMenu
+        // debugger
+
         return(
             props.closeMenu
         )

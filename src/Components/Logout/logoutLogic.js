@@ -1,9 +1,13 @@
+import { useContext } from "react"
+import { userContext } from "../../Context/userContext"
 
 const logoutLogic = (user) => {
-    // const { setCurrentUser } = useContext(userContext)
-    // setCurrentUser(null)
-    user(null)
+    console.log('coucou')
     localStorage.clear()
+
+
+    user("")
+    
 }
 
 export default logoutLogic

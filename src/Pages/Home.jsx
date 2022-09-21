@@ -14,16 +14,27 @@ const Home = () => {
     const navigateCreateBill = () => {
         navigate('/createbill')
     }
-    console.log(currentUser.userId)
     
+    const logout = () => {
+        localStorage.clear()
+
+
+        setCurrentUser("")
+        navigate('/login')
+    }
 
     useEffect(() => {
+        console.log("currentUser",!currentUser.userId,"currentuser vide",currentUser.userId==="")
+        // if(!currentUser && currentUser === ""){
+        //     navigate("/login")
+        // }
         if(!currentUser.userId){
             navigate("/login")
         }
+
     })
     return(
-        <div className="flex-col justify-center max-w-screen-lg mx-auto bg-neutral-200 min-h-screen">
+        <div className="flex-col justify-center max-w-screen-lg mx-auto bg-groupomania-red shadow-2xl min-h-screen">
             <div className='pt-5 flex justify-center'>  
                 <Button 
                     component="label"
@@ -33,6 +44,9 @@ const Home = () => {
                     Qu'avez vous à dire aujourd'hui?                   
                 </Button>
             </div>
+            <Button onClick={logout}>
+                test
+            </Button>
             <div>
                 Bienvenue {currentUser.userName}
             </div>
