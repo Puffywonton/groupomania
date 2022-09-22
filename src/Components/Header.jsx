@@ -6,7 +6,7 @@ import logo from '../logo-black.svg'
 
 const Header = () => {
     return(
-        <header className="border-b p-5 flex justify-between items-center">
+        <header className="border-b bg-white p-5 flex justify-between items-center">
             <Link to={`/`} className="font-bold">
                 <img className="max-w-xs" src={logo} alt="groupomania"></img>
             </Link>

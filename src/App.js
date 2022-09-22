@@ -14,7 +14,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState('')
   return (
       <DataProvider value={{currentUser, setCurrentUser}}>
-        <div>
+        <div className='bg-slate-50'>
           <Router>
             <Header />
               <Routes>

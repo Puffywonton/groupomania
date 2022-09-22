@@ -62,48 +62,62 @@ const Login = () => {
         }
     }, [errors, dataIsCorrect, setCurrentUser, values, navigate])
 
+
+    //bg-neutral-200
+
     return(
-        <div className="flex justify-center max-w-screen-lg mx-auto bg-neutral-200 h-screen">
-            <div className="bloc p-3 flex-col items-center justify-center">
+        <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
+            <div className="mt-10 bg-blue-500 w-fit h-fit border rounded-md overflow-hidden">
                 <Box
-                    component="form"
                     sx={{
                         '& > :not(style)': { m: 1, width: '25ch' },
-                        background: "lightgrey",
+                        background: "white",
                         width: 'auto',
-                        height: 'auto',
+                        height: '250px',
                         display: "flex",
-                        border: "1px, solid",
                         flexDirection: "column",
                         alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                    noValidate
-                    autoComplete="off"
+                        justifyContent: "space-evenly",
+                    }}                 
                 >
-                    <TextField
-                        error={errors.email? true : false} 
-                        helperText={errors.email}
-                        required 
-                        name='email'
-                        id="emailInput" 
-                        label="email" 
-                        variant="outlined"
-                        value={values.email}
-                        onChange={handleChange}
-                    />
-                    <TextField 
-                        error={errors.password? true: false}
-                        helperText={errors.password}
-                        required
-                        name='password'
-                        id="passwordInput"
-                        type="password"
-                        label="password" 
-                        variant="outlined" 
-                        value={values.password}
-                        onChange={handleChange}
-                    />
+                    <Box
+                        component="form"
+                        noValidate
+                        autoComplete="off"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '25ch' },
+                            width: 'auto',
+                            height: 'auto',
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                        }}    
+                    >
+                        <TextField
+                            error={errors.email? true : false} 
+                            helperText={errors.email}
+                            required 
+                            name='email'
+                            id="emailInput" 
+                            label="email" 
+                            variant="outlined"
+                            value={values.email}
+                            onChange={handleChange}
+                        />
+                        <TextField 
+                            error={errors.password? true: false}
+                            helperText={errors.password}
+                            required
+                            name='password'
+                            id="passwordInput"
+                            type="password"
+                            label="password" 
+                            variant="outlined" 
+                            value={values.password}
+                            onChange={handleChange}
+                        />
+                    </Box>
                     <Button 
                         variant='contained'
                         onClick={FormSubmit}
@@ -111,7 +125,7 @@ const Login = () => {
                         Login
                     </Button>               
                 </Box>
-                <div className="bg-orange-400 flex justify-center p-3">
+                <div className="bg-stone-300 flex justify-center p-5">
                     <span className="p-3">Pas encore inscrit? rejoignez nous ici:</span>
                     <Button
                         variant='contained'
