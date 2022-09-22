@@ -67,7 +67,7 @@ const Login = () => {
 
     return(
         <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
-            <div className="mt-10 bg-blue-500 w-fit h-fit border rounded-md overflow-hidden">
+            <div className="mt-10 drop-shadow-xl shadow-blue-500 w-fit h-fit border rounded-md overflow-hidden">
                 <Box
                     sx={{
                         '& > :not(style)': { m: 1, width: '25ch' },
@@ -86,6 +86,7 @@ const Login = () => {
                         autoComplete="off"
                         sx={{
                             '& > :not(style)': { m: 1, width: '25ch' },
+                            // margintop: "4",
                             width: 'auto',
                             height: 'auto',
                             display: "flex",
