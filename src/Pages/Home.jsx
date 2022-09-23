@@ -1,14 +1,13 @@
-import React, { useContext, useState }  from 'react';
+import React, { useContext }  from 'react';
 import { userContext } from "../Context/userContext"
-import {Routes, Route, useNavigate, Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import axios from 'axios'
-import Loader from '../Components/Loader';
-import BillCard from '../Components/BillCard';
-import Login from '../Components/Login/Login';
 import Billboard from '../Components/BillStuff/Billboard';
 import { Button } from "@mui/material";
+import MuiButton from '../Components/MuiStuff/MuiButton';
+
 const Home = () => {
+    console.log('hello')
     const { currentUser, setCurrentUser } = useContext(userContext)
     const navigate = useNavigate()
     const navigateCreateBill = () => {
@@ -36,13 +35,7 @@ const Home = () => {
     return(
         <div className="flex-col justify-center max-w-screen-lg mx-auto bg-groupomania-red shadow-2xl min-h-screen">
             <div className='pt-5 flex justify-center'>  
-                <Button 
-                    component="label"
-                    variant='contained'
-                    onClick={navigateCreateBill}                  
-                >
-                    Qu'avez vous à dire aujourd'hui?                   
-                </Button>
+                {MuiButton("Qu'avez vous à dire aujourd'hui?",navigateCreateBill)}
             </div>
             <Button onClick={logout}>
                 test

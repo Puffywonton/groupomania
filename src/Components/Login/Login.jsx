@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Validation from "./Validation"
 
 import axios from "axios"
+import { fontFamily } from "@mui/system";
+import MuiButton from "../MuiStuff/MuiButton";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -32,6 +34,7 @@ const Login = () => {
     const [dataIsCorrect, setDataIsCorrect] = useState(false)
 
     const FormSubmit = (event) => {
+        console.log("coucou")
         event.preventDefault()
         setErrors(Validation(values))
         setDataIsCorrect(true)
@@ -66,7 +69,7 @@ const Login = () => {
     //bg-neutral-200
 
     return(
-        <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
+        <div className="font-link flex justify-center max-w-screen-lg mx-auto h-screen">
             <div className="mt-10 drop-shadow-xl shadow-blue-500 w-fit h-fit border rounded-md overflow-hidden">
                 <Box
                     sx={{
@@ -105,6 +108,13 @@ const Login = () => {
                             variant="outlined"
                             value={values.email}
                             onChange={handleChange}
+                            sx={{
+                                fontFamily: "Bungee Spice",
+                                color: "yellow",
+                                backgroundColor: "red"
+                            }}
+                            InputProps={{ style: { fontFamily: "Bungee Spice" } }}
+                            InputLabelProps={{ style: { fontFamily: "Bungee Spice" } }}
                         />
                         <TextField 
                             error={errors.password? true: false}
@@ -119,21 +129,11 @@ const Login = () => {
                             onChange={handleChange}
                         />
                     </Box>
-                    <Button 
-                        variant='contained'
-                        onClick={FormSubmit}
-                    >
-                        Login
-                    </Button>               
+                    {MuiButton("Login",FormSubmit)}               
                 </Box>
                 <div className="bg-stone-300 flex justify-center p-5">
                     <span className="p-3">Pas encore inscrit? rejoignez nous ici:</span>
-                    <Button
-                        variant='contained'
-                        onClick={navigateSignup}
-                    >
-                        Signup
-                    </Button>
+                    {MuiButton("Signup",navigateSignup)}    
                 </div>            
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import BillModifier from '../Components/BillModifier'
+import BillModifier from '../Components/BillStuff/BillModifier'
 import useGetOneBill from '../Components/BillStuff/useGetOneBill'
 import Loader from '../Components/Loader'
 

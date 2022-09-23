@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button';
 import Validation from "./Validation.js"
 
 
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import MuiTextField from "../MuiStuff/MuiTextField"
+import MuiButton from "../MuiStuff/MuiButton.jsx";
 const Swal = require('sweetalert2')
 
 const Signup = () => {
@@ -22,6 +23,7 @@ const Signup = () => {
     })
     
     const handleChange = (event) => {
+        console.log("handleCHange", event.target.name, event.target.value)
         setValues({
           ...values,
           [event.target.name]: event.target.value,
@@ -36,9 +38,6 @@ const Signup = () => {
         console.log("form submit")
         setErrors(Validation(values))
         setDataIsCorrect(true)
-            //ct token user
-            //usenav page nav
-            //set state? user created ?
     }
     useEffect(() =>{
         if(Object.keys(errors).length === 0 && dataIsCorrect){
@@ -77,69 +76,52 @@ const Signup = () => {
                 noValidate
                 autoComplete="off"
             >
-                <TextField
-                    error={errors.firstName? true : false} 
-                    helperText={errors.firstName}
-                    required 
-                    name='firstName'
-                    id="firstNameInput" 
-                    label="firstName" 
-                    variant="outlined"
-                    value={values.firstName}
-                    onChange={handleChange}
-                />
-                <TextField
-                    error={errors.lastName? true : false} 
-                    helperText={errors.lastName}
-                    required 
-                    name='lastName'
-                    id="lastNameInput" 
-                    label="lastname" 
-                    variant="outlined"
-                    value={values.lastName}
-                    onChange={handleChange}
-                />
-                <TextField
-                    error={errors.email? true : false} 
-                    helperText={errors.email}
-                    required 
-                    name='email'
-                    id="emailInput" 
-                    label="email" 
-                    variant="outlined"
-                    value={values.email}
-                    onChange={handleChange}
-                />
-                <TextField 
-                    error={errors.password? true: false}
-                    helperText={errors.password}
-                    required
-                    name='password'
-                    id="passwordInput"
-                    type="password"
-                    label="password" 
-                    variant="outlined" 
-                    value={values.password}
-                    onChange={handleChange}
-                />
-                <TextField
-                    error={errors.pwConfirm? true: false}
-                    helperText={errors.pwConfirm}
-                    required
-                    id="pwConfirm"
-                    name='pwConfirm'
-                    type="password" 
-                    label="Confirm Password" 
-                    variant="outlined"
-                    value={values.pwConfirm}
-                    onChange={handleChange} 
-                />
-                <Button 
-                    variant='contained'
-                    onClick={FormSubmit}
-                >
-                    Créer un compte
-                </Button>
+                {MuiTextField({
+                    error: errors.firstName,
+                    name: "firstName",
+                    id: "firstNameInput",
+                    label: "Prénom",
+                    values: values.firstName,
+                    type: "text",
+                    handleChange: handleChange 
+                })}
+                {MuiTextField({
+                    error: errors.lastName,
+                    name: "lastName",
+                    id: "lastNameInput",
+                    label: "Nom",
+                    values: values.lastName,
+                    type: "text",
+                    handleChange: handleChange 
+                })}
+                {MuiTextField({
+                    error: errors.email,
+                    name: "email",
+                    id: "emailInput",
+                    label: "Email",
+                    values: values.email,
+                    type: "text",
+                    handleChange: handleChange 
+                })}
+                {MuiTextField({
+                    error: errors.password,
+                    name: "password",
+                    id: "passwordInput",
+                    label: "Mot de passe",
+                    values: values.password,
+                    type: "password",
+                    handleChange: handleChange 
+                })}
+                {MuiTextField({
+                    error: errors.pwConfirm,
+                    name: "pwConfirm",
+                    id: "pwConfirmInput",
+                    label: "Confirmation du mot de passe",
+                    values: values.pwConfirm,
+                    type: "password",
+                    handleChange: handleChange 
+                })}
+                {MuiButton("Créer un compte",FormSubmit)}
             </Box>
         </div>
     )

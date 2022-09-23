@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import BillCard from '../BillCard';
+import React from 'react';
+import BillCard from './BillCard';
 import Loader from '../Loader';
 import useGetAllBills from './useGetAllBills';
 
@@ -24,7 +23,6 @@ const Billboard = () => {
             <div key={bill._id}>
                 <BillCard 
                     bill = {bill}
-                    //below
                     update = {setBillboard}
                 />
             </div>

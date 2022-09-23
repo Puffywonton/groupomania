@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import BillCardSettingsBox from './BillStuff/BillCardSettingsBox'
-import BillCardLikeBox from './BillStuff/BillCardLikeBox'
-import { userContext } from '../Context/userContext'
+import BillCardSettingsBox from './BillCardSettingsBox'
+import BillCardLikeBox from './BillCardLikeBox'
+import { userContext } from '../../Context/userContext'
 
 const BillCard = (props) => {
     const { currentUser } = useContext(userContext)

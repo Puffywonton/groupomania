@@ -4,6 +4,14 @@
 
 @tailwind utilities;
 
+.font-link {
+    font-family: 'Lato', sans-serif;
+}
+
+* {
+    font-family: 'Bungee Spice';
+}
+
 .loader {
     border: 5px solid #f3f3f3;
     border-radius: 50%;
