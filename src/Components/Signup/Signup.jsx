@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import Validation from "./Validation.js"
 
 
@@ -57,7 +56,12 @@ const Signup = () => {
         }
     }, [errors, dataIsCorrect, values, navigate])
     
-
+    const arr = [
+        {error: errors.firstName,name: "firstName",id: "firstNameInput",label: "Prénom",values: values.firstName,type: "text",handleChange: handleChange },
+        {error: errors.lastName,name: "lastName",id: "lastNameInput",label: "Nom",values: values.lastName,type: "text",handleChange: handleChange}
+    
+    ]
+    
     return(
         <div className="bloc p-3 flex-col items-center justify-center">
             <Box
@@ -75,8 +79,23 @@ const Signup = () => {
                 }}
                 noValidate
                 autoComplete="off"
+            
             >
-                {MuiTextField({
+                {arr.map((pizza,i) => {
+                    return(
+                        <MuiTextField 
+                        error = {pizza.error}
+                        name = {pizza.name}
+                        id = {pizza.id}
+                        label = {pizza.label}
+                        values = {pizza.values}
+                        type = {pizza.type}
+                        handleChange = {pizza.handleChange}
+                        />
+                    )
+                    
+                })}
+                {/* {MuiTextField({
                     error: errors.firstName,
                     name: "firstName",
                     id: "firstNameInput",
@@ -120,7 +139,7 @@ const Signup = () => {
                     values: values.pwConfirm,
                     type: "password",
                     handleChange: handleChange 
-                })}
+                })} */}
                 {MuiButton("Créer un compte",FormSubmit)}
             </Box>
         </div>

@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import Validation from "./Validation"
 
 import axios from "axios"
-import { fontFamily } from "@mui/system";
+
 import MuiButton from "../MuiStuff/MuiButton";
+import MuiTextField from "../MuiStuff/MuiTextField";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -98,36 +99,24 @@ const Login = () => {
                             justifyContent: "space-around",
                         }}    
                     >
-                        <TextField
-                            error={errors.email? true : false} 
-                            helperText={errors.email}
-                            required 
-                            name='email'
-                            id="emailInput" 
-                            label="email" 
-                            variant="outlined"
-                            value={values.email}
-                            onChange={handleChange}
-                            sx={{
-                                fontFamily: "Bungee Spice",
-                                color: "yellow",
-                                backgroundColor: "red"
-                            }}
-                            InputProps={{ style: { fontFamily: "Bungee Spice" } }}
-                            InputLabelProps={{ style: { fontFamily: "Bungee Spice" } }}
-                        />
-                        <TextField 
-                            error={errors.password? true: false}
-                            helperText={errors.password}
-                            required
-                            name='password'
-                            id="passwordInput"
-                            type="password"
-                            label="password" 
-                            variant="outlined" 
-                            value={values.password}
-                            onChange={handleChange}
-                        />
+                        {MuiTextField({
+                            error: errors.email,
+                            name: "email",
+                            id: "emailInput",
+                            label: "Email",
+                            values: values.email,
+                            type: "text",
+                            handleChange: handleChange 
+                        })}
+                        {MuiTextField({
+                            error: errors.password,
+                            name: "password",
+                            id: "passwordInput",
+                            label: "Mot de passe",
+                            values: values.password,
+                            type: "password",
+                            handleChange: handleChange 
+                        })}
                     </Box>
                     {MuiButton("Login",FormSubmit)}               
                 </Box>
