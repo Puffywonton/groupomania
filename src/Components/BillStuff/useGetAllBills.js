@@ -1,7 +1,9 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { userContext } from "../../Context/userContext"
 
 const useGetAllBills = () => {
+    const { currentUser, setCurrentUser } = useContext(userContext)
     const [billboard, setBillboard] = useState({
         loading: false,
         data: null,
@@ -10,43 +12,42 @@ const useGetAllBills = () => {
     })
 
     useEffect(() => {
-        
-        if(billboard.reload){
-            const tokenStr = JSON.parse(localStorage.getItem('token'))
-            const url_billboard = 'http://localhost:8000/api/billboard'
-            
-            setBillboard({
-                loading: true,
-                data: null,
-                error: false,
-                reload: false
-            })
-            axios.get(url_billboard, {
-                headers: {
-                    'Authorization': `Bearer ${tokenStr}`
-                }
+        // if(currentUser){
+            if(billboard.reload && currentUser.userId){
+                console.log("getting billboard")
+                const tokenStr = JSON.parse(localStorage.getItem('token'))
+                const url_billboard = 'http://localhost:8000/api/billboard'              
+                setBillboard({
+                    loading: true,
+                    data: null,
+                    error: false,
+                    reload: false
                 })
-                .then(response => {
-                    console.log("BILLBOARD RECEIVED",response)
-                    setBillboard({
-                        loading: false,
-                        data: response.data,
-                        error: false,
-                        reload: false,
+                axios.get(url_billboard, {
+                    headers: {
+                        'Authorization': `Bearer ${tokenStr}`
+                    }
                     })
-                    
-                })
-                .catch(error => {
-                    setBillboard({
-                        loading: false,
-                        data: error.message,
-                        error: true,
-                        reload: false
+                    .then(response => {
+                        console.log("BILLBOARD RECEIVED",response)
+                        setBillboard({
+                            loading: false,
+                            data: response.data,
+                            error: false,
+                            reload: false,
+                        })                      
                     })
-                })
-        }
-        
-    }, [billboard.reload])
+                    .catch(error => {
+                        setBillboard({
+                            loading: false,
+                            data: error.message,
+                            error: true,
+                            reload: false
+                        })
+                    })
+            }
+        // }           
+    }, [billboard.reload, currentUser])
     
     return{billboard, setBillboard}
 }

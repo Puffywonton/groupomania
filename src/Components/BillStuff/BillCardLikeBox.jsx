@@ -175,14 +175,16 @@ const BillCardLikeBox = (props) => {
             exclusive
             onChange={handleLike}
             aria-label="text alignment"
-            className="flex space-between w-full"
+            className="flex justify-between w-full"
+            sx={{ borderLeft: 0, borderRight: 0, borderRadius: 0}}
             >
-                <ToggleButton className="w-1/2" value="like"
+                <ToggleButton className="w-1/2 rounded-none" value="like" sx={{ borderLeft: 0, borderBottom: 0, borderRadius: 0 }}
                 >
-                    <FontAwesomeIcon fontSize="20" className="pr-1" icon={faArrowUp} />
+                    <FontAwesomeIcon fontSize="20" className="pr-1" icon={faArrowUp}  />
                     <div className="text-lg">{billCardParams.billLikesCount}</div>
                 </ToggleButton>
-                <ToggleButton className="w-1/2" value="dislike">
+                <ToggleButton className="w-1/2 rounded-none" value="dislike" sx={{ borderRight: 0, borderBottom: 0, borderRadius: 0 }}
+                >
                     <FontAwesomeIcon fontSize="20" className="pr-1" icon={faArrowDown} />
                     <div className="text-lg">{billCardParams.billDislikesCount}</div>
                 </ToggleButton>

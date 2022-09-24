@@ -6,13 +6,8 @@ const MuiTextField = (props) => {
     console.log('hello')
     return(
         <TextField
-            sx={{
-                fontFamily: "Bungee Spice",
-                color: "yellow",
-                backgroundColor: "blue"
-            }}
-            InputProps={{ style: { fontFamily: "Bungee Spice" } }}
-            InputLabelProps={{ style: { fontFamily: "Bungee Spice" } }}
+            InputProps={{ style: { fontFamily: 'Lato' } }}
+            InputLabelProps={{ style: { fontFamily: 'Lato' } }}
             variant="outlined"    
             error={props.error? true : false} 
             helperText={props.error}

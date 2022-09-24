@@ -15,7 +15,7 @@ const BillCard = (props) => {
     }
 
     return(
-        <div className='max-w-2xl mx-auto border rounded overflow-hidden bg-groupomania-pink mb-10'>
+        <div className='max-w-2xl mx-auto border rounded overflow-hidden bg-white mb-10'>
             <div className='p-3'>
                 <div className='font-bold border-b text-xl mb-5 flex justify-between'>
                     <h2 className='mb-3'>{props.bill.title}</h2>

@@ -7,7 +7,8 @@ const MuiButtonUpload = (name, action) => {
             component="label"
             variant="contained"
             sx={{
-                fontFamily: "Bungee Spice",
+                fontFamily: 'Lato',
+                textTransform: 'lowercase'
                 // backgroundColor: "#FD2D01"
             }}
         >

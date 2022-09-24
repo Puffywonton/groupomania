@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import { Button } from "@mui/material";
 import React from "react";
 import HandleBillDelete from './DeleteBill';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const BillCardSettingsBox = (props) => {
     const navigate = useNavigate()
@@ -28,19 +27,16 @@ const BillCardSettingsBox = (props) => {
 
     return(
         <div>
-            <Button
+            <IconButton
+                aria-label="more"
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
                 onClick={handleClick}
             >
-                <FontAwesomeIcon 
-                    icon={faBars}
-                    fontSize="20"
-                    color='black'
-                />
-            </Button>
+                <MoreVertIcon />
+            </IconButton>
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}

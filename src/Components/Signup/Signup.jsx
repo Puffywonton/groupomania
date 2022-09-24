@@ -58,90 +58,61 @@ const Signup = () => {
     
     const arr = [
         {error: errors.firstName,name: "firstName",id: "firstNameInput",label: "Prénom",values: values.firstName,type: "text",handleChange: handleChange },
-        {error: errors.lastName,name: "lastName",id: "lastNameInput",label: "Nom",values: values.lastName,type: "text",handleChange: handleChange}
-    
+        {error: errors.lastName,name: "lastName",id: "lastNameInput",label: "Nom",values: values.lastName,type: "text",handleChange: handleChange},
+        {error: errors.email,name: "email",id: "emailInput",label: "Email",values: values.email,type: "text",handleChange: handleChange},
+        {error: errors.password,name: "password",id: "passwordInput",label: "Mot de passe",values: values.password,type: "password",handleChange: handleChange },
+        {error: errors.pwConfirm,name: "pwConfirm",id: "pwConfirmInput",label: "Confirmation du mot de passe",values: values.pwConfirm,type: "password",handleChange: handleChange }
     ]
     
     return(
-        <div className="bloc p-3 flex-col items-center justify-center">
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                    background: "lightgrey",
-                    width: 'auto',
-                    height: 'auto',
-                    display: "flex",
-                    border: "1px, solid",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-                noValidate
-                autoComplete="off"
-            
-            >
-                {arr.map((pizza,i) => {
-                    return(
-                        <MuiTextField 
-                        error = {pizza.error}
-                        name = {pizza.name}
-                        id = {pizza.id}
-                        label = {pizza.label}
-                        values = {pizza.values}
-                        type = {pizza.type}
-                        handleChange = {pizza.handleChange}
-                        />
-                    )
-                    
-                })}
-                {/* {MuiTextField({
-                    error: errors.firstName,
-                    name: "firstName",
-                    id: "firstNameInput",
-                    label: "Prénom",
-                    values: values.firstName,
-                    type: "text",
-                    handleChange: handleChange 
-                })}
-                {MuiTextField({
-                    error: errors.lastName,
-                    name: "lastName",
-                    id: "lastNameInput",
-                    label: "Nom",
-                    values: values.lastName,
-                    type: "text",
-                    handleChange: handleChange 
-                })}
-                {MuiTextField({
-                    error: errors.email,
-                    name: "email",
-                    id: "emailInput",
-                    label: "Email",
-                    values: values.email,
-                    type: "text",
-                    handleChange: handleChange 
-                })}
-                {MuiTextField({
-                    error: errors.password,
-                    name: "password",
-                    id: "passwordInput",
-                    label: "Mot de passe",
-                    values: values.password,
-                    type: "password",
-                    handleChange: handleChange 
-                })}
-                {MuiTextField({
-                    error: errors.pwConfirm,
-                    name: "pwConfirm",
-                    id: "pwConfirmInput",
-                    label: "Confirmation du mot de passe",
-                    values: values.pwConfirm,
-                    type: "password",
-                    handleChange: handleChange 
-                })} */}
-                {MuiButton("Créer un compte",FormSubmit)}
-            </Box>
+        <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
+            <div className="mt-10 drop-shadow-xl shadow-blue-500 w-fit h-fit border rounded-md overflow-hidden">
+                <Box
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                        background: "white",
+                        width: 'auto',
+                        height: '550px',
+                        display: "flex",
+                        border: "1px, solid",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                    noValidate
+                >
+                    <div className="text-2xl border-b pb-3 text-center">Inscription</div>
+                    <Box
+                        component="form"
+                        noValidate
+                        autoComplete="off"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '25ch' },
+                            width: 'auto',
+                            height: 'auto',
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                        }}    
+                    >
+                        {arr.map((form) => {
+                        return(
+                            <MuiTextField 
+                            error = {form.error}
+                            name = {form.name}
+                            key = {form.id}
+                            label = {form.label}
+                            values = {form.values}
+                            type = {form.type}
+                            handleChange = {form.handleChange}
+                            />
+                        )
+                        })}
+                    </Box>
+                    {MuiButton("Créer un compte",FormSubmit)}
+                </Box>
+            </div>
         </div>
     )
 }

@@ -8,7 +8,7 @@ const Header = () => {
     return(
         <header className="border-b bg-white p-5 flex justify-between items-center">
             <Link to={`/`} className="font-bold">
-                <img className="max-w-xs" src={logo} alt="groupomania"></img>
+                <img className="w-40 md:w-80" src={logo} alt="groupomania"></img>
             </Link>
             <Navigation />
         </header>

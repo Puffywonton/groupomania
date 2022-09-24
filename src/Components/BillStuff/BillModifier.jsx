@@ -63,6 +63,7 @@ const BillModifier = (props) => {
                 values: values,
                 setValues: setValues,
                 FormSubmit: FormSubmit,
+                mod: true
             })}
         </div>         
     )

@@ -70,7 +70,7 @@ const Login = () => {
     //bg-neutral-200
 
     return(
-        <div className="font-link flex justify-center max-w-screen-lg mx-auto h-screen">
+        <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
             <div className="mt-10 drop-shadow-xl shadow-blue-500 w-fit h-fit border rounded-md overflow-hidden">
                 <Box
                     sx={{
@@ -90,7 +90,6 @@ const Login = () => {
                         autoComplete="off"
                         sx={{
                             '& > :not(style)': { m: 1, width: '25ch' },
-                            // margintop: "4",
                             width: 'auto',
                             height: 'auto',
                             display: "flex",
@@ -118,11 +117,11 @@ const Login = () => {
                             handleChange: handleChange 
                         })}
                     </Box>
-                    {MuiButton("Login",FormSubmit)}               
+                    {MuiButton("Connexion",FormSubmit)}               
                 </Box>
                 <div className="bg-stone-300 flex justify-center p-5">
                     <span className="p-3">Pas encore inscrit? rejoignez nous ici:</span>
-                    {MuiButton("Signup",navigateSignup)}    
+                    {MuiButton("Inscription",navigateSignup)}    
                 </div>            
             </div>
         </div>
