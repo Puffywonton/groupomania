@@ -1,8 +1,7 @@
+
+#admin cred:
 admin@groupomania.fr
 mdp: admin
-
-
-
 
 
 
