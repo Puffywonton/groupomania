@@ -3,11 +3,10 @@ import { userContext } from "../Context/userContext"
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Billboard from '../Components/BillStuff/Billboard';
-import { Button } from "@mui/material";
 import MuiButton from '../Components/MuiStuff/MuiButton';
 
 const Home = () => {
-    const { currentUser, setCurrentUser } = useContext(userContext)
+    const { currentUser } = useContext(userContext)
     const navigate = useNavigate()
     const navigateCreateBill = () => {
         navigate('/createbill')

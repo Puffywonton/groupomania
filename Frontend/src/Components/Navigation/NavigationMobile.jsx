@@ -39,6 +39,9 @@ const NavigationMobile = (props) => {
             logoutLogic(props.setCurrentUser)
             navigateHome()
         }
+        if(event.target.id === "navItemHome"){
+            navigateHome()
+        }
         setAnchorEl(null);
     };
     return(
