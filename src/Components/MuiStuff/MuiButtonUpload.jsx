@@ -9,7 +9,6 @@ const MuiButtonUpload = (name, action) => {
             sx={{
                 fontFamily: 'Lato',
                 textTransform: 'lowercase'
-                // backgroundColor: "#FD2D01"
             }}
         >
             {name}

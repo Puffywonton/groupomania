@@ -34,7 +34,6 @@ const BillCreator = () => {
                   },
             })
             .then(response => {
-                console.log(response.data)
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
@@ -45,7 +44,14 @@ const BillCreator = () => {
                 navigateHome()
             })
             .catch(catchErrors => {
-                console.log(catchErrors)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: catchErrors,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                navigateHome()
             })
         }
     }, [navigate, dataIsCorrect, values, tokenStr])

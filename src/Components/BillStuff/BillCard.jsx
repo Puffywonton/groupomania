@@ -17,7 +17,7 @@ const BillCard = (props) => {
     return(
         <div className='max-w-2xl mx-auto border rounded overflow-hidden bg-white mb-10'>
             <div className='p-3'>
-                <div className='font-bold border-b text-xl mb-5 flex justify-between'>
+                <div className='font-bold border-b text-xl sm:mb-5 flex justify-between'>
                     <h2 className='mb-3'>{props.bill.title}</h2>
                     {activateSettings}
                 </div>
@@ -25,7 +25,7 @@ const BillCard = (props) => {
             {props.bill.imageUrl &&
                 <div
                     style={{'backgroundImage': `url('${props.bill.imageUrl}')`}}
-                    className="w-full h-96 bg-blue bg-cover"
+                    className="w-full h-60 sm:h-96 bg-blue bg-cover"
                 />
 
             }

@@ -6,8 +6,6 @@ const Swal = require('sweetalert2')
 
 
 const BillModifier = (props) => {
-    
-    console.log("picture", props.bill.imageUrl)
     const navigate = useNavigate()
     
     const { id } = useParams()
@@ -31,8 +29,7 @@ const BillModifier = (props) => {
     useEffect(() => {
         const navigateHome = () => {
             navigate('/')
-        }
-        console.log(values)       
+        }  
         if(dataIsCorrect){
             axios.put(url, values, {
                 headers: {
@@ -41,7 +38,6 @@ const BillModifier = (props) => {
                   },
             })
             .then(response => {
-                console.log(response.data)
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
@@ -52,7 +48,14 @@ const BillModifier = (props) => {
                 navigateHome()
             })
             .catch(catchErrors => {
-                console.log(catchErrors)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: catchErrors,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                navigateHome()
             })
         }
     }, [dataIsCorrect, values, tokenStr, url, navigate])

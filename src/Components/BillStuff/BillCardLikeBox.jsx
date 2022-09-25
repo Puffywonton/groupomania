@@ -8,10 +8,6 @@ import axios from "axios";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-
-import MuiToggleButton from "@mui/material/ToggleButton";
-import { styled } from "@mui/material/styles";
-
 const BillCardLikeBox = (props) => {
     const { currentUser } = useContext(userContext)
     const tokenStr = JSON.parse(localStorage.getItem('token'))
@@ -38,46 +34,37 @@ const BillCardLikeBox = (props) => {
                     'Authorization': `Bearer ${tokenStr}`
                   }
                 })
-                    .then(response => {
-                        console.log(response)
-                        console.log("post updated")
+                    // .then(response => {
+                    //     // QUESTION 
+                    //     console.log(response)
+                    //     console.log("post updated")
                         
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                        console.log("error")
-                    })
+                    // })
+                    // .catch(error => {
+                    //     console.log(error.message)
+                    //     console.log("error")
+                    // })
         }
         likeUpdate.isTrue = false
     }, [likeUpdate, tokenStr])
 
-    // const ToggleButton = styled(MuiToggleButton)(({ selectedColor }) => ({
-    //     "&.Mui-selected, &.Mui-selected:hover": {
-    //       color: "black",
-    //       backgroundColor: selectedColor
-    //     }
-    // }));
     const [toggleButton, setToggleButton] = useState({
 
     })
     useEffect(() => {
         if(billCardParams.userLikesBill){
             setToggleButton("like")
-            console.log("youpi")
         }
         if(billCardParams.userDislikesBill){
             setToggleButton("dislike")
         }
     }, [billCardParams.userDislikesBill, billCardParams.userLikesBill])
-    
-    console.log(billCardParams)
-    
-    
+       
     const handleLike = (event, status) => {
         if(status === "like"){
-            console.log("click like")
+            //user clicked like
                 if(billCardParams.userDislikesBill){
-                    console.log("REMOVING DISLIKE")
+                    //user already disliked removing dislike and adding like
                     setBillCardParams({
                         userLikesBill: currentUser.userId,
                         billLikesCount: (billCardParams.billLikesCount+1),
@@ -85,6 +72,7 @@ const BillCardLikeBox = (props) => {
                         billDislikesCount: (billCardParams.billDislikesCount-1)
                     })
                 }else{
+                    //adding like
                     setBillCardParams({
                         ...billCardParams,
                         userLikesBill: currentUser.userId,
@@ -102,9 +90,9 @@ const BillCardLikeBox = (props) => {
                 })
         }
         if(status === "dislike"){
-            console.log("click dislike")
+            //user clicked dislike
             if(billCardParams.userLikesBill){
-                    console.log("REMOVING LIKE")
+                    //user already liked removing like and adding dislike
                     setBillCardParams({
                         userDislikesBill:currentUser.userId,
                         billDislikesCount: (billCardParams.billDislikesCount+1),
@@ -129,9 +117,9 @@ const BillCardLikeBox = (props) => {
                 })
         }
         if(status === null){
-            console.log("click cancel")
+            //user wants to cancel like/dislike
             if(billCardParams.userLikesBill){
-                console.log("removing like")
+                //already liked removing like
                 setBillCardParams({
                     ...billCardParams,
                     userLikesBill:"",
@@ -148,7 +136,7 @@ const BillCardLikeBox = (props) => {
                 })
             }
             if(billCardParams.userDislikesBill){
-                console.log("removing dislike")
+                //already disliked removing dislike
                 setBillCardParams({
                     ...billCardParams,
                     userDislikesBill:"",

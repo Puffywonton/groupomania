@@ -1,10 +1,13 @@
 
 import React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import { useNavigate } from "react-router-dom"
 import logoutLogic from '../Logout/logoutLogic';
 import MuiMenuItem from '../MuiStuff/MuiMenuItem';
+
+
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const NavigationMobile = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,20 +43,16 @@ const NavigationMobile = (props) => {
     };
     return(
         <div className='md:hidden'>
-                <Button
+                <IconButton
+                    aria-label="more"
                     id="basic-button"
                     aria-controls={open ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
                     onClick={handleClick}
-                    // sx={{
-                    //     fontFamily: "Bungee Spice",
-                    //     // backgroundColor: "#FD2D01"
-                    // }}
-                    variant="outlined"
                 >
-                    Navigation
-                </Button>
+                    <MenuIcon fontSize="medium"/>
+                </IconButton>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

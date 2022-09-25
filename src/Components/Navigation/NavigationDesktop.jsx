@@ -1,22 +1,21 @@
-
 import React from 'react';
 import { Link } from "react-router-dom"
 import logoutLogic from '../Logout/logoutLogic';
 
 const NavigationDesktop = (props) => {
     return(
-        <div className='hidden md:block'>
+        <div className='hidden md:block pr-10'>
             {!props.currentUser ? (
                 <div className="inline-flex space-x-6">  
                     <Link 
                         to="/login" 
-                        className="py-3 border-b text-xl block hover:text-blue-500"
+                        className="lalo-bold py-3 border-b text-xl block hover:text-blue-500"
                     >
                         Connexion
                     </Link>
                     <Link 
                         to="/signup" 
-                        className="py-3 border-b text-xl block hover:text-blue-500"
+                        className="lalo-bold py-3 border-b text-xl block hover:text-blue-500"
                     >
                         Inscription
                     </Link>
@@ -28,7 +27,7 @@ const NavigationDesktop = (props) => {
                     <Link 
                         to="/" 
                         onClick={() => {logoutLogic(props.currentUser)}}
-                        className="py-3 border-b text-lg block hover:text-blue-500"
+                        className="lalo-bold py-3 border-b text-lg block hover:text-blue-500"
                     >
                         Déconnexion                           
                     </Link>

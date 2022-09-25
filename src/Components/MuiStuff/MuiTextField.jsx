@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField'
 
 
 const MuiTextField = (props) => {
-    console.log('hello')
     return(
         <TextField
             InputProps={{ style: { fontFamily: 'Lato' } }}

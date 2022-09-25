@@ -4,7 +4,6 @@ import { DataProvider } from './Context/userContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Home from './Pages/Home'
-import About from './Pages/About'
 import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import CreateBill from './Pages/CreateBill';
@@ -19,7 +18,6 @@ const App = () => {
             <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/createbill" element={<CreateBill />} />
@@ -29,7 +27,6 @@ const App = () => {
           </Router>    
         </div>        
       </DataProvider>
-      
   );
 }
 

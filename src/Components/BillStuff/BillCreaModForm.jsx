@@ -1,11 +1,9 @@
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import MuiButton from "../MuiStuff/MuiButton";
 import MuiButtonUpload from "../MuiStuff/MuiButtonUpload"
 import TextField from '@mui/material/TextField'
 const BillCreaModForm = (props) => {
-    console.log("mod bill form")
-
     const [imageChange, setImageChange] = useState(false)
 
     const handleChange = (event) => {
@@ -36,7 +34,7 @@ const BillCreaModForm = (props) => {
     }
 
     return(
-        <div className="flex-col justify-center max-w-screen-lg mx-auto h-auto">
+        <div className="flex-col justify-center max-w-screen-lg mx-auto h-screen">
             <div className="mt-10 my-20 bloc drop-shadow-xl shadow-blue-500 w-auto max-w-2xl bg-white border rounded-md overflow-hidden p-5 flex-col items-center justify-center max-w-2xl mx-auto">
                 <Box>
                     <div className='border-b pb-3 text-lg font-bold'>{props.mod === true ? "Modifier une publication" : "Créer une publication"} </div>

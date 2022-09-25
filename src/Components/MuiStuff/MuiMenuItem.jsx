@@ -5,7 +5,6 @@ const MuiMenuItem = (name, id, action) => {
     return(
         <MenuItem sx={{
             fontFamily: 'Lato',
-            // backgroundColor: "#FD2D01"
             }} 
             id={id}
             onClick={action}>

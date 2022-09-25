@@ -16,7 +16,6 @@ const BillCardSettingsBox = (props) => {
     };
     const handleClose = (event) => {
         setAnchorEl(null);
-        console.log(event.target.id)
         if(event.target.id === "menuItem-Mod"){
             navigate(`/modifybill/${props.bill._id}`)
         }

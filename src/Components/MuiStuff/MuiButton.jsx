@@ -8,8 +8,8 @@ const MuiButton = (name, action) => {
             onClick={action}
             sx={{
                 fontFamily: 'Lato',
-                textTransform: 'lowercase'
-                // backgroundColor: "#FD2D01"
+                textTransform: 'capitalize',
+                boxShadow: 3
             }}
         >
             {name}

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Box from '@mui/material/Box'
 import Validation from "./Validation.js"
-
-
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import MuiTextField from "../MuiStuff/MuiTextField"
@@ -22,7 +20,6 @@ const Signup = () => {
     })
     
     const handleChange = (event) => {
-        console.log("handleCHange", event.target.name, event.target.value)
         setValues({
           ...values,
           [event.target.name]: event.target.value,
@@ -34,7 +31,6 @@ const Signup = () => {
 
     const FormSubmit = (event) => {
         event.preventDefault()
-        console.log("form submit")
         setErrors(Validation(values))
         setDataIsCorrect(true)
     }
@@ -42,7 +38,6 @@ const Signup = () => {
         if(Object.keys(errors).length === 0 && dataIsCorrect){
             axios.post('http://localhost:8000/api/auth/signup', values)
             .then(response => {
-              console.log(response)
               Swal.fire({
                 position: 'top',
                 icon: 'success',
@@ -50,7 +45,6 @@ const Signup = () => {
                 showConfirmButton: false,
                 timer: 1500
               })
-
               navigate('/')
             });
         }
@@ -66,7 +60,7 @@ const Signup = () => {
     
     return(
         <div className="flex justify-center max-w-screen-lg mx-auto h-screen">
-            <div className="mt-10 drop-shadow-xl shadow-blue-500 w-fit h-fit border rounded-md overflow-hidden">
+            <div className="mt-4 sm:mt-10 drop-shadow-xl shadow-blue-500 h-fit border rounded-md overflow-hidden">
                 <Box
                     sx={{
                         '& > :not(style)': { m: 1, width: '25ch' },
@@ -77,11 +71,11 @@ const Signup = () => {
                         border: "1px, solid",
                         flexDirection: "column",
                         alignItems: "center",
-                        justifyContent: "space-evenly",
+                        justifyContent: "space-around",
                     }}
                     noValidate
                 >
-                    <div className="text-2xl border-b pb-3 text-center">Inscription</div>
+                    <div className=" lalo-bold text-2xl border-b pb-4 text-center">Inscription</div>
                     <Box
                         component="form"
                         noValidate
@@ -110,7 +104,9 @@ const Signup = () => {
                         )
                         })}
                     </Box>
-                    {MuiButton("Créer un compte",FormSubmit)}
+                    <div className="pb-4 flex justify-center">
+                        {MuiButton("Créer un compte",FormSubmit)}
+                    </div>
                 </Box>
             </div>
         </div>
