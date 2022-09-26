@@ -1,7 +1,35 @@
+# start the backend:
+in the backend directory, run:
+### `nodemon server`
 
-#admin cred:
+# make a .env in the backend directory
+
+# start the front:
+in the Frontend directory, run:
+### `npm start`
+
+# admin cred:
 admin@groupomania.fr
 mdp: admin
+
+# users already created:
+
+j.caribou@groupomania.fr 
+mdp:test
+
+m.moulagauffre@groupomania.fr
+mdp:test
+
+a.deloin@groupomania.fr
+mdp:test
+
+g.moussaka@groupomania.fr
+mdp:test	
+
+# I included an /images folder in the git because the images are saved locally, the 4 pictures included are for the demo
+
+
+
 
 
 
