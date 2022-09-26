@@ -15,10 +15,10 @@ const BillCard = (props) => {
     }
 
     return(
-        <div className='max-w-2xl mx-auto border rounded overflow-hidden bg-white mb-10'>
+        <div className='max-w-2xl drop-shadow-xl shadow-blue-500 mx-auto border rounded overflow-hidden bg-white mb-10'>
             <div className='p-3'>
                 <div className='font-bold border-b text-xl sm:mb-5 flex justify-between'>
-                    <h2 className='mb-3'>{props.bill.title}</h2>
+                    <div className='mb-3 ml-1'>{props.bill.title}</div>
                     {activateSettings}
                 </div>
             </div>

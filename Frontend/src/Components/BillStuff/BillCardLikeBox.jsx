@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+const Swal = require('sweetalert2')
 
 const BillCardLikeBox = (props) => {
     const { currentUser } = useContext(userContext)
@@ -34,16 +35,24 @@ const BillCardLikeBox = (props) => {
                     'Authorization': `Bearer ${tokenStr}`
                   }
                 })
-                    // .then(response => {
-                    //     // QUESTION 
-                    //     console.log(response)
-                    //     console.log("post updated")
-                        
-                    // })
-                    // .catch(error => {
-                    //     console.log(error.message)
-                    //     console.log("error")
-                    // })
+                    .then(response => {
+                        Swal.fire({
+                            position: 'top',
+                            icon: 'success',
+                            title: 'like/dislike enregistré',
+                            showConfirmButton: false,
+                            timer: 650
+                          })   
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error,
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                    })
         }
         likeUpdate.isTrue = false
     }, [likeUpdate, tokenStr])
