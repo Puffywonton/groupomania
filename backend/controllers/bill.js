@@ -81,7 +81,7 @@ exports.modifyBill = (req, res, next) => {
 exports.deleteBill = (req, res, next) => {
   Bill.findOne({ _id: req.params.id })
     .then(bill => {
-      if (bill.userId === req.auth.userId || req.auth.userId == "6329c34059bcae873c79b880") {
+      if (bill.userId === req.auth.userId) {
         if(bill.imageUrl){
           const filename = bill.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
